@@ -1,0 +1,262 @@
+<template lang="html">
+  <div>
+    <div class="label">
+      <div :class="{'on': typeSelect === 0}" class="all" @click="showAll($event)">
+        <div class="all-swapper">
+          <div class="all-tag">
+            {{tag[0]}}
+          </div><div class="all-number">
+            {{evaluateNumber(0)}}
+          </div>
+        </div>
+      </div>
+      <div :class="{'on': typeSelect === 1}" class="positive" @click="showPositive($event)">
+        <div class="positive-swapper">
+            <span class="positive-tag">
+              {{tag[1]}}</span><div class="positive-number">
+              {{evaluateNumber(1)}}
+            </div>
+        </div>
+      </div>
+      <div :class="{'on': typeSelect === 2}" class="negative" @click="showNevigate($event)">
+        <div class="negative-swapper">
+          <span class="negative-tag">
+            {{tag[2]}}{{evaluateNumber(2)}}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="select">
+      <span class="icon-check_circle" @click="CheckStatus()" :class="{'content-status': contentType === false}"></span>
+      <span class="explain">只看有内容的评价</span>
+    </div>
+  </div>
+</template>
+
+<script type="text/ecmascript-6">
+/* eslin    t-disable no-unused-vars */
+
+const ALL = 0
+const POSITIVE = 1
+const NEVIGATE = 2
+
+export default {
+  props: {
+    ratings: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    typeSelect: {
+      type: Number,
+      default () {
+        return ALL
+      }
+    },
+    contentType: {
+      type: Boolean,
+      default () {
+        return true
+      }
+    },
+    tag: {
+      type: Array,
+      default () {
+        return [
+          '全部',
+          '推荐',
+          '吐槽'
+        ]
+      }
+    }
+  },
+  computed: {
+  },
+  methods: {
+    filterByContent (filterList, contentType) {
+      // =根据是否显示全部内容进行过滤
+      let newList = []
+      console.log('contentType: ', this.contentType)
+      if (contentType === true) {
+        return filterList
+      } else {
+        for (let i = 0; i < filterList.length; i++) {
+          if (filterList[i].text !== '') {
+            newList.push(filterList[i])
+          }
+        }
+        return newList
+      }
+    },
+    filterByLabel (filterType) {
+      // 0代表 全部  1代表 推荐   2代表吐槽
+      // 求出各种评价类型的
+      if (filterType === 0) {
+        // 全部, 这里显示默认为空
+        return this.ratings
+      }
+      let newFilterType = filterType - 1
+      let filterList = []
+      for (let i = 0; i < this.ratings.length; i++) {
+        if (this.ratings[i].rateType === newFilterType) {
+          filterList.push(this.ratings[i]) // 将列表数据 ?? 待定
+        }
+      }
+      // 过滤内容为空/全部的评价
+      return filterList
+    },
+    CheckStatus () {
+      this.$emit('setContentType')
+      this.$emit('showEval', this.typeSelect, this.contentType)
+      // 数量跟随状态发生改变
+    },
+    evaluateNumber (typeSelect) {
+      // 功能：统计评价数目
+      // typeSelect: 评价类型
+      if (typeSelect === ALL) {
+        // 统计  全部评价数目    过滤掉没有内容的评价
+        let all = this.filterByContent(this.ratings, this.contentType) // 到底是this.ratings好还是this.selectEval
+        // this.$emit('showEval', ALL, this.contentType)
+        console.log('allCount: ', all)
+        return all.length
+      } else if (typeSelect === POSITIVE) {
+        // 统计 推荐评价数目
+        let posArray = this.filterByLabel(POSITIVE)
+        let pos = this.filterByContent(posArray, this.contentType)
+        console.log('posCount: ', pos)
+        return pos.length
+      } else {
+        // 统计 吐槽评价数目
+        let negArray = this.filterByLabel(NEVIGATE)
+        console.log('count of negArray: ', negArray.length)
+        let neg = this.filterByContent(negArray, this.contentType)
+        console.log('negCount: ', neg)
+        return neg.length
+      }
+    },
+    showAll (event) {
+      // 显示所有评价，并且文字变白
+      console.log('showall')
+      this.typeSelect = ALL
+      this.$emit('setSelectType', ALL)
+      this.$emit('seDefaultContentType')
+      this.$emit('showEval', ALL, this.contentType)
+    },
+    showPositive (event) {
+      console.log('showPositive')
+      this.typeSelect = POSITIVE
+      this.$emit('setSelectType', POSITIVE)
+      this.$emit('seDefaultContentType')
+      this.$emit('showEval', POSITIVE, this.contentType)
+    },
+    showNevigate (event) {
+      console.log('showNevigate')
+      this.typeSelect = NEVIGATE
+      // this.contentType = true
+      // this.$emit('showEval', NEVIGATE, this.contentType)
+      this.$emit('setSelectType', NEVIGATE)
+      this.$emit('seDefaultContentType')
+      this.$emit('showEval', NEVIGATE, this.contentType)
+    }
+  }
+}
+</script>
+
+<style lang="stylus" rel="stylesheet/stylus">
+.label
+  padding-bottom: 18px
+  border-bottom: 1px solid rgba(7, 17, 27, 0.1)
+  .all
+    display: inline-block
+    position: relative
+    cursor: pointer
+    margin-right: 8px
+    width: 80px
+    height: 35px
+    font-size: 12px
+    color: rgb(77, 85, 93)
+    line-height: 16px
+    background-color: rgb(0, 160, 220)
+    border-radius: 2px
+    &.on
+      color: #07111b
+      font-weight: 600
+      border: 0.5px solid black
+    .all-swapper
+      position: absolute
+      display: inline-block
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      .all-tag
+        display: inline-block
+      .all-number
+        display: inline-block
+  .positive
+    cursor: pointer
+    display: inline-block
+    position: relative
+    margin-right: 8px
+    width: 80px
+    height: 35px
+    font-size: 12px
+    color: rgb(77, 85, 93)
+    line-height: 16px
+    border-radius: 2px
+    background-color: rgba(0, 160, 220, 0.2)
+    &.on
+      color: #07111b
+      font-weight: 600
+      border: 0.5px solid black
+    .positive-swapper
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      .positive-tag
+        display: inline-block
+      .positive-number
+        display: inline-block
+  .negative
+    cursor: pointer
+    position: relative
+    display: inline-block
+    width: 80px
+    height: 35px
+    font-size: 12px
+    color: rgb(77, 85, 93)
+    line-height: 16px
+    border-radius: 2px
+    background-color: rgba(77, 85, 93, 0.2)
+    &.on
+      color: #07111b
+      font-weight: 600
+      border: 0.5px solid black
+    .negative-swapper
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      .negative-tag
+        display: inline-block
+      .negative-number
+        display: inline-block
+.select
+  padding: 18px 0px 0px 0px
+  .icon-check_circle
+    cursor: pointer
+    display: inline-block
+    vertical-align: middle
+    padding-right: 4px
+    font-size: 24px
+    color: rgb(147, 153, 159)
+    line-height: 24px
+    &.content-status
+      color: green
+  .explain
+    display: inline-block
+    font-size: 12px
+    color: rgb(147, 153, 159)
+    line-height: 24px
+</style>
