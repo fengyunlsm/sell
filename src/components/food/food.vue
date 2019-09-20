@@ -5,8 +5,8 @@
         <div class="image-wrapper">
           <img :src="food.image">
         </div>
-        <div class="leave-wrapper">
-          <i class="icon-arrow_lift" @click="closeShopDetail"></i>
+        <div class="leave-wrapper" @click="closeShopDetail">
+          <i class="icon-arrow_lift" ></i>
         </div>
       </div>
       <div class="content-detail">
@@ -42,7 +42,9 @@
         <div class="headers">
           商品评价
         </div>
-        <ratingselect @setSelectType="setSelectType" @seDefaultContentType="seDefaultContentType" @setContentType="setContentType" @showEval="showEval" ref="ratingselect" :ratings="food.ratings" :type-Select="selectType" :contentType="contentType" :tag="tag"></ratingselect>
+        <ratingselect @setSelectType="setSelectType" @seDefaultContentType="seDefaultContentType"
+        @setContentType="setContentType" @showEval="showEval" ref="ratingselect" :ratings="food.ratings"
+         :type-Select="selectType" :contentType="contentType" :tag="tag"></ratingselect>
       </div>
       <div class="comments-wrapper">
         <ul>
@@ -80,6 +82,11 @@ export default {
       type: Object
     }
   },
+  components: {
+    'cartcontrol': cartcontrol,
+    'split': split,
+    'ratingselect': ratingselect
+  },
   data: function () {
     return {
       showFlag: false,
@@ -91,7 +98,6 @@ export default {
   },
   created () {
     this.selectEval = this.food.ratings
-    this.showEval(this.selectType, this.contentType)
   },
   methods: {
     setShowFlag () {
@@ -151,15 +157,10 @@ export default {
       // 点击三个标签显示所有评价内容
       // 点击下面的勾选按钮，能筛选其中的内容
       // 什么鬼，调用了三次这个地方那个
-      let temp = this.$refs.ratingselect.filterByLabel(label)
-      this.selectEval = this.$refs.ratingselect.filterByContent(temp, this.contentType)
-      return this.selectEval
+      console.log('-----开始初始-----------')
+      let resultByLabel = this.$refs.ratingselect.filterByLabel(label)
+      this.selectEval = this.$refs.ratingselect.filterByContent(resultByLabel, contentType)
     }
-  },
-  components: {
-    'cartcontrol': cartcontrol,
-    'split': split,
-    'ratingselect': ratingselect
   }
 }
 </script>

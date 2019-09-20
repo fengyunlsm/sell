@@ -26,9 +26,9 @@
                   <div class="name">
                     {{food.name}}
                   </div>
-                  <div class="description">
+                  <span class="description">
                     {{food.description}}
-                  </div>
+                  </span>
                   <div class="sale-information">
                     <span class="sellcount">月售{{food.sellCount}}份</span>
                     <span class="rating">好评率{{food.rating}}</span>
@@ -37,9 +37,9 @@
                     <span class="new-price">¥{{food.price}}</span>
                     <span class="old-price" v-show="food.oldPrice">¥{{food.oldPrice}}</span>
                   </div>
-                  <div class="cart">
-                    <cartcontrol @increment="incrementTotal" :food="food"></cartcontrol>
-                  </div>
+                </div>
+                <div class="cart">
+                  <cartcontrol @increment="incrementTotal" :food="food"></cartcontrol>
                 </div>
               </li>
             </ul>
@@ -267,15 +267,17 @@ export default {
           vertical-align: top
           margin-left: 10px
           margin-top: 2px
+          position: absolute
           .name
             font-size: 14px
             color: rgb(7, 17, 27)
             line-height: 14px
+            margin-bottom: 8px
           .description
             margin: 8px 0px
             font-size: 10px
             color: rgb(147, 153, 159)
-            line-height: 10px
+            line-height: 15px
           .sale-information
             margin: 8px 0px
             font-size: 0px
@@ -303,10 +305,11 @@ export default {
               color: rgb(147, 153, 159)
               font-weight: normal/700
               line-weight: 24px
-          .cart
-            position: absolute
-            width: 48px
-            height: 24px
-            right: 0px
-            bottom: 18px
+        .cart
+          position: absolute
+          width: 48px
+          height: 24px
+          right: 0px
+          bottom: 18px
+
 </style>

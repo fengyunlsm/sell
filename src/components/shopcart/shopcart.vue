@@ -278,6 +278,7 @@ export default {
     position: relative
     background-color: #141d27
     font-size: 0
+    height: 100%
     .content-left
       .logo-wrapper
         display: inline-block

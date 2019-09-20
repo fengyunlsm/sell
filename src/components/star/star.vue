@@ -105,6 +105,7 @@ export default {
           width: 14.5px
     &.star-48
       display: table
+      margin: 0 auto
       .star-item
         display: table-cell
         width: 19px

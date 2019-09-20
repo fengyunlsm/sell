@@ -1,13 +1,12 @@
 <template>
   <div id='app'>
     <v-header :seller="seller"></v-header>
-    <!-- <v-header :ratings="ratings"></v-header> -->
     <div class="bar">
       <div class="bar-item">
           <router-link to="/goods">商品</router-link>
       </div>
       <div class="bar-item">
-          <router-link to="/ratings">评论</router-link>
+          <router-link to="/ratings">评价</router-link>
       </div>
       <div class="bar-item">
           <router-link to="/comments">商家</router-link>
@@ -36,7 +35,7 @@ const ERR_OK = 0
         }
       })
     },
-    components: {
+      components: {
         'v-header': header
       }
     }

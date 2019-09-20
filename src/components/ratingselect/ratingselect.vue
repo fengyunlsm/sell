@@ -75,12 +75,10 @@ export default {
   },
   methods: {
     filterByContent (filterList, contentType) {
-      // =根据是否显示全部内容进行过滤
-      let newList = []
-      console.log('contentType: ', this.contentType)
-      if (contentType === true) {
-        return filterList
-      } else {
+      // 根据是否显示全部内容进行过滤
+
+      let getNoContentComment = function () {
+        let newList = []
         for (let i = 0; i < filterList.length; i++) {
           if (filterList[i].text !== '') {
             newList.push(filterList[i])
@@ -88,41 +86,52 @@ export default {
         }
         return newList
       }
+
+      let noContentComment = getNoContentComment()
+      let hasContentComment = filterList
+
+      if (contentType === true) {
+        return hasContentComment
+      } else {
+        return noContentComment
+      }
     },
     filterByLabel (filterType) {
-      // 0代表 全部  1代表 推荐   2代表吐槽
-      // 求出各种评价类型的
+      // 根据标签来筛选评论
       if (filterType === 0) {
         // 全部, 这里显示默认为空
         return this.ratings
-      }
-      let newFilterType = filterType - 1
-      let filterList = []
-      for (let i = 0; i < this.ratings.length; i++) {
-        if (this.ratings[i].rateType === newFilterType) {
-          filterList.push(this.ratings[i]) // 将列表数据 ?? 待定
+      } else {
+        let newFilterType = filterType - 1
+        let filterList = []
+        // 推荐 和 吐槽 和
+        for (let i = 0; i < this.ratings.length; i++) {
+          if (this.ratings[i].rateType === newFilterType) {
+            filterList.push(this.ratings[i])
+          }
         }
+        // 过滤内容为空/全部的评价
+        return filterList
       }
-      // 过滤内容为空/全部的评价
-      return filterList
     },
     CheckStatus () {
       this.$emit('setContentType')
       this.$emit('showEval', this.typeSelect, this.contentType)
-      // 数量跟随状态发生改变
+      // 数跟随状态发生改变
+      // 设定是不一致的情况下
     },
     evaluateNumber (typeSelect) {
       // 功能：统计评价数目
       // typeSelect: 评价类型
       if (typeSelect === ALL) {
-        // 统计  全部评价数目    过滤掉没有内容的评价
+        // 统计  全部评价数目  过滤掉没有内容的评价
         let all = this.filterByContent(this.ratings, this.contentType) // 到底是this.ratings好还是this.selectEval
         // this.$emit('showEval', ALL, this.contentType)
         console.log('allCount: ', all)
         return all.length
       } else if (typeSelect === POSITIVE) {
         // 统计 推荐评价数目
-        let posArray = this.filterByLabel(POSITIVE)
+        let posArray = this.filterByLabel(POSITIVE) // 设定不一致
         let pos = this.filterByContent(posArray, this.contentType)
         console.log('posCount: ', pos)
         return pos.length

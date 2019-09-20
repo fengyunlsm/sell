@@ -16,6 +16,7 @@ Vue.use(VueResource)
 // let app = Vue.extend(App)
 // let router = new VueRouter()
 const routes = [
+  {path: '/', component: goods},
   {path: '/goods', component: goods},
   {path: '/comments', component: comments},
   {path: '/ratings', component: ratings}

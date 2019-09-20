@@ -137,9 +137,8 @@ export default {
       // 点击三个标签显示所有评价内容
       // 点击下面的勾选按钮，能筛选其中的内容
       // 什么鬼，调用了三次这个地方那个
-      let temp = this.$refs.ratingselect.filterByLabel(label)
-      this.selectEval = this.$refs.ratingselect.filterByContent(temp, this.contentType)
-      return this.selectEval
+      let resultByLabel = this.$refs.ratingselect.filterByLabel(label)
+      this.selectEval = this.$refs.ratingselect.filterByContent(resultByLabel, contentType)
     }
   },
   components: {

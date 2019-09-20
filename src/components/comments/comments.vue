@@ -69,7 +69,7 @@
       <div class="picture" ref="bigWrapper">
         <ul class="picture-wrapper" ref="picWrapper">
           <li class="each-picture" v-for="pic in seller.pics" v-bind:key="pic.id">
-            <img :src="pic" width="120" height="120">
+            <img :src="pic" width="120" height="120" alt="">
           </li>
         </ul>
       </div>
@@ -107,6 +107,7 @@ export default {
   },
   methods: {
     // 方法参数
+    //
     pictureScroll () {
       let picWidth = 120
       let margin = 6
@@ -305,6 +306,7 @@ export default {
       .picture-wrapper
         font-size: 0px
         .each-picture
+          pointer-events: none
           display: inline-block
           width: 120px
           height: 90px
