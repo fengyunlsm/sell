@@ -32,7 +32,7 @@
     </div>
     <split></split>
     <div class="ratingselect-wrapper">
-      <ratingselect @showEval="showEval" ref="ratingselect" @setSelectType="setSelectType" @seDefaultContentType="seDefaultContentType" @setContentType="setContentType" :ratings="ratings" :type-Select="selectType" :contentType="contentType" :tag="tag"></ratingselect>
+      <ratingselect ref="ratingselect" @filterByLabel="filterByLabel" @filterByContent="filterByContent" @setSelectType="setSelectType" @setDefaultContentType="setDefaultContentType" @setContentType="setContentType" :ratings="ratings" :type-Select="selectType" :contentType="contentType" :tag="tag"></ratingselect>
     </div>
     <ul class="comment-wrapper">
       <li class="comment-list" v-for="rating in selectEval" v-bind:key="rating.id">
@@ -91,23 +91,30 @@ export default {
       showFlag: false,
       selectType: POSITIVE,
       contentType: true,
-      tag: ['全部', '满意', '不满'],
-      selectEval: [],
+      tag: ['全部', '满意', '吐槽'],
       ratings: []
     }
   },
   created: function () {
     this.$nextTick(() => {
-      this.selectEval = this.ratings
-      this.showEval(this.selectType, this.contentType)
+      // this.selectEval = this.ratings   // 有必要删除这一行
+      // this.showEval(this.selectType, this.contentType) 有必要删除这一行
     })
     this.$http.get('/api/ratings').then((response) => {
       let resp = response.body
       if (resp.errno === ERR_OK) {
-        this.selectEval = resp.data
         this.ratings = resp.data
       }
     })
+  },
+  computed: {
+
+    selectEval () {
+      // 根据类型 和  切换内容 来显示 所有评论
+      let resultByLabel = this.filterByLabel(this.selectType)
+      let result = this.filterByContent(resultByLabel, this.contentType)
+      return result
+    }
   },
   methods: {
     date (time) {
@@ -120,10 +127,52 @@ export default {
       let s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
       return Y + '-' + M + '-' + D + ' ' + h + ':' + m + ':' + s
     },
+    filterByContent (filterList, contentType) {
+        // 根据是否显示全部内容进行过滤
+      let getNoContentComment = function () {
+        let newList = []
+        for (let i = 0; i < filterList.length; i++) {
+          if (filterList[i].text !== '') {
+            newList.push(filterList[i])
+          }
+        }
+        return newList
+      }
+
+      let noContentComment = getNoContentComment()
+      let hasContentComment = filterList
+      // console.log('contentType:', contentType)
+      // console.log('noContentComment', noContentComment)
+      // console.log('hasContentComment', hasContentComment)
+      if (contentType === true) {
+        return hasContentComment
+      } else {
+        return noContentComment
+      }
+    },
+    filterByLabel (filterType) {
+      // 根据标签来筛选评论
+      if (filterType === 0) {
+        // 全部, 这里显示默认为空
+        return this.ratings
+      } else {
+        let newFilterType = filterType - 1
+        let filterList = []
+        // 推荐 和 吐槽 和
+        for (let i = 0; i < this.ratings.length; i++) {
+          if (this.ratings[i].rateType === newFilterType) {
+            filterList.push(this.ratings[i])
+          }
+        }
+        // 过滤内容为空/全部的评价
+        console.log('filterList:', filterList)
+        return filterList
+      }
+    },
     setSelectType (selectType) {
       this.selectType = selectType
     },
-    seDefaultContentType () {
+    setDefaultContentType () {
       this.contentType = true
     },
     setContentType () {
@@ -132,13 +181,6 @@ export default {
       } else {
         this.contentType = true
       }
-    },
-    showEval (label, contentType) {
-      // 点击三个标签显示所有评价内容
-      // 点击下面的勾选按钮，能筛选其中的内容
-      // 什么鬼，调用了三次这个地方那个
-      let resultByLabel = this.$refs.ratingselect.filterByLabel(label)
-      this.selectEval = this.$refs.ratingselect.filterByContent(resultByLabel, contentType)
     }
   },
   components: {

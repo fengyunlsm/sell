@@ -1,33 +1,33 @@
 <template lang="html">
   <div>
     <div class="label">
-      <div :class="{'on': typeSelect === 0}" class="all" @click="showAll($event)">
+      <div :class="{'on': this.sta === 0}" class="all" @click="showComment($event, 0)">
         <div class="all-swapper">
           <div class="all-tag">
             {{tag[0]}}
           </div><div class="all-number">
-            {{evaluateNumber(0)}}
+            {{CommentTotal(0)}}
           </div>
         </div>
       </div>
-      <div :class="{'on': typeSelect === 1}" class="positive" @click="showPositive($event)">
+      <div :class="{'on': this.sta === 1}" class="positive" @click="showComment($event, 1)">
         <div class="positive-swapper">
             <span class="positive-tag">
               {{tag[1]}}</span><div class="positive-number">
-              {{evaluateNumber(1)}}
+              {{CommentTotal(1)}}
             </div>
         </div>
       </div>
-      <div :class="{'on': typeSelect === 2}" class="negative" @click="showNevigate($event)">
+      <div :class="{'on': this.sta === 2}" class="negative" @click="showComment($event, 2)">
         <div class="negative-swapper">
           <span class="negative-tag">
-            {{tag[2]}}{{evaluateNumber(2)}}
+            {{tag[2]}}{{CommentTotal(2)}}
           </span>
         </div>
       </div>
     </div>
     <div class="select">
-      <span class="icon-check_circle" @click="CheckStatus()" :class="{'content-status': contentType === false}"></span>
+      <span class="icon-check_circle" @click="isShowAllComment()" :class="{'content-status': contentType === false}"></span>
       <span class="explain">只看有内容的评价</span>
     </div>
   </div>
@@ -37,9 +37,6 @@
 /* eslin    t-disable no-unused-vars */
 
 const ALL = 0
-const POSITIVE = 1
-const NEVIGATE = 2
-
 export default {
   props: {
     ratings: {
@@ -71,12 +68,18 @@ export default {
       }
     }
   },
-  computed: {
+  data () {
+    return {
+      sta: ALL
+    }
   },
   methods: {
+    isShowAllComment () {
+      // 只显示有内容的评论
+      this.$emit('setContentType')
+    },
     filterByContent (filterList, contentType) {
-      // 根据是否显示全部内容进行过滤
-
+    // 根据是否显示全部内容进行过滤
       let getNoContentComment = function () {
         let newList = []
         for (let i = 0; i < filterList.length; i++) {
@@ -86,10 +89,8 @@ export default {
         }
         return newList
       }
-
       let noContentComment = getNoContentComment()
       let hasContentComment = filterList
-
       if (contentType === true) {
         return hasContentComment
       } else {
@@ -114,59 +115,17 @@ export default {
         return filterList
       }
     },
-    CheckStatus () {
-      this.$emit('setContentType')
-      this.$emit('showEval', this.typeSelect, this.contentType)
-      // 数跟随状态发生改变
-      // 设定是不一致的情况下
-    },
-    evaluateNumber (typeSelect) {
+    CommentTotal (typeSelect) {
       // 功能：统计评价数目
-      // typeSelect: 评价类型
-      if (typeSelect === ALL) {
-        // 统计  全部评价数目  过滤掉没有内容的评价
-        let all = this.filterByContent(this.ratings, this.contentType) // 到底是this.ratings好还是this.selectEval
-        // this.$emit('showEval', ALL, this.contentType)
-        console.log('allCount: ', all)
-        return all.length
-      } else if (typeSelect === POSITIVE) {
-        // 统计 推荐评价数目
-        let posArray = this.filterByLabel(POSITIVE) // 设定不一致
-        let pos = this.filterByContent(posArray, this.contentType)
-        console.log('posCount: ', pos)
-        return pos.length
-      } else {
-        // 统计 吐槽评价数目
-        let negArray = this.filterByLabel(NEVIGATE)
-        console.log('count of negArray: ', negArray.length)
-        let neg = this.filterByContent(negArray, this.contentType)
-        console.log('negCount: ', neg)
-        return neg.length
-      }
+      let com = this.filterByLabel(typeSelect)
+      let comment = this.filterByContent(com, this.contentType)
+      let commentTotal = comment.length
+      return commentTotal
     },
-    showAll (event) {
-      // 显示所有评价，并且文字变白
-      console.log('showall')
-      this.typeSelect = ALL
-      this.$emit('setSelectType', ALL)
-      this.$emit('seDefaultContentType')
-      this.$emit('showEval', ALL, this.contentType)
-    },
-    showPositive (event) {
-      console.log('showPositive')
-      this.typeSelect = POSITIVE
-      this.$emit('setSelectType', POSITIVE)
-      this.$emit('seDefaultContentType')
-      this.$emit('showEval', POSITIVE, this.contentType)
-    },
-    showNevigate (event) {
-      console.log('showNevigate')
-      this.typeSelect = NEVIGATE
-      // this.contentType = true
-      // this.$emit('showEval', NEVIGATE, this.contentType)
-      this.$emit('setSelectType', NEVIGATE)
-      this.$emit('seDefaultContentType')
-      this.$emit('showEval', NEVIGATE, this.contentType)
+    showComment (event, type) {
+      this.sta = type
+      this.$emit('setSelectType', type)
+      this.$emit('setDefaultContentType')
     }
   }
 }

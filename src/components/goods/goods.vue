@@ -153,7 +153,6 @@ export default {
       this.$refs.food.setShowFlag()
     },
     incrementTotal (target) {
-      console.log('incrementTotal')
       this.$refs.shopcart.drop(target)
     },
     clear () {

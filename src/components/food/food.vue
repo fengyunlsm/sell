@@ -5,7 +5,7 @@
         <div class="image-wrapper">
           <img :src="food.image">
         </div>
-        <div class="leave-wrapper" @click="closeShopDetail">
+        <div class="leave-wrapper" @click="showFlag = false">
           <i class="icon-arrow_lift" ></i>
         </div>
       </div>
@@ -42,9 +42,12 @@
         <div class="headers">
           商品评价
         </div>
-        <ratingselect @setSelectType="setSelectType" @seDefaultContentType="seDefaultContentType"
-        @setContentType="setContentType" @showEval="showEval" ref="ratingselect" :ratings="food.ratings"
-         :type-Select="selectType" :contentType="contentType" :tag="tag"></ratingselect>
+        <ratingselect @filterByLabel="filterByLabel" @setSelectType="setSelectType"
+        @filterByContent="filterByContent"
+        @setDefaultContentType="setDefaultContentType"
+        @setContentType="setContentType" ref="ratingselect" :ratings="food.ratings"
+         :type-Select="selectType" :contentType="contentType" :tag="tag">
+       </ratingselect>
       </div>
       <div class="comments-wrapper">
         <ul>
@@ -79,7 +82,12 @@ const NEVIGATE = 2
 export default {
   props: {
     food: {
-      type: Object
+      type: Object,
+      default () {
+        return {
+          'ratings': []
+        }
+      }
     }
   },
   components: {
@@ -90,16 +98,68 @@ export default {
   data: function () {
     return {
       showFlag: false,
-      selectType: POSITIVE,
+      selectType: ALL,
       contentType: true,
-      tag: ['全部', '推荐', '吐槽'],
-      selectEval: []
+      tag: ['全部', '推荐', '吐槽']
     }
   },
   created () {
-    this.selectEval = this.food.ratings
+    // 计算属性是不一致的情况下  进行设定  参考 混日子
+    console.log('food.ratings:', this.food.ratings)
+  },
+  computed: {
+    selectEval () {
+      // 根据标签和内容显示与否 来显示评论
+      let resultByLabel = this.filterByLabel(this.selectType)
+      console.log('resultByLabel:', resultByLabel)
+      let result = this.filterByContent(resultByLabel, this.contentType)
+      return result
+    }
   },
   methods: {
+    filterByContent (filterList, contentType) {
+      // 根据是否显示全部内容进行过滤
+      let getNoContentComment = function () {
+        let newList = [] // 不能获取到长度  如何才能获取到长度呢
+        for (let i = 0; i < filterList.length; i++) {
+          if (filterList[i].text !== '') {
+            newList.push(filterList[i])
+          }
+        }
+        return newList
+      }
+
+      let noContentComment = getNoContentComment()
+      let hasContentComment = filterList
+
+      if (contentType === true) {
+        return hasContentComment
+      } else {
+        return noContentComment
+      }
+    },
+    filterByLabel (filterType = 0) {
+      // 根据标签来筛选评论
+      if (filterType === 0) {
+        // 全部, 这里显示默认为空
+        console.log('this.food.ratings:', this.food)
+        return this.food.ratings
+      } else {
+        let newFilterType = filterType - 1
+        let filterList = []
+        // 推荐 和 吐槽 和
+        // length 拿不到这个长度 那怎么才能拿到
+        // 获取生命周期
+        for (let i = 0; i < this.food.ratings.length; i++) {
+          if (this.food.ratings[i].rateType === newFilterType) {
+            filterList.push(this.food.ratings[i])
+          }
+        }
+        // 过滤内容为空/全部的评价
+        // 不能获取长度
+        return filterList
+      }
+    },
     setShowFlag () {
       /* eslint-disable no-unused-vars */
       // 功能：点击显示该页面
@@ -114,19 +174,12 @@ export default {
         }
       })
     },
-    closeShopDetail () {
-      // 关闭商品详情页
-      this.showFlag = false
-    },
     addFirstShop (event) {
       console.log('addFirstShop')
       // if (!event._constructed) {
       //   // 去掉自带的点击事件,暂时不需要，暂时认为是better-scroll才需要
       //   return
       // }
-      console.log('addshop')
-      // 将商品加入购物车
-      // 父组件调用子组件中的addCart
       this.$refs.cartcontrol.addCart(event)
     },
     date (time) {
@@ -140,10 +193,9 @@ export default {
       return Y + '-' + M + '-' + D + ' ' + h + ':' + m + ':' + s
     },
     setSelectType (selectType) {
-      console.log('')
       this.selectType = selectType
     },
-    seDefaultContentType () {
+    setDefaultContentType () {
       this.contentType = true
     },
     setContentType () {
@@ -152,14 +204,6 @@ export default {
       } else {
         this.contentType = true
       }
-    },
-    showEval (label, contentType) {
-      // 点击三个标签显示所有评价内容
-      // 点击下面的勾选按钮，能筛选其中的内容
-      // 什么鬼，调用了三次这个地方那个
-      console.log('-----开始初始-----------')
-      let resultByLabel = this.$refs.ratingselect.filterByLabel(label)
-      this.selectEval = this.$refs.ratingselect.filterByContent(resultByLabel, contentType)
     }
   }
 }
