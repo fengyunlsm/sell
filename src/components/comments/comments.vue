@@ -328,7 +328,7 @@ export default {
           padding-top: 16px
           padding-bottom: 16px
           border-top: 1px solid rgba(7, 17, 27, 0.1)
-          font-szie: 12px
+          font-size: 12px
           font-weight: 200
           color: #07111b
           line-height: 16px

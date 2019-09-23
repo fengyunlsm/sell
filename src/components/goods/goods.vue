@@ -13,7 +13,7 @@
     </div>
     <div class="shoplist-wrapper" >
         <ul>
-            <li v-for="item in goods" v-bind:key="item.id" class="shop shoplists" >
+            <li v-for="item in goods" v-bind:key="item.id" class="shop shoplists">
               <div class="title">
                 {{item.name}}
               </div>
@@ -110,7 +110,7 @@ export default {
         this.goods = response.data
         this.$nextTick(() => {
           this._initScroll()
-          this._calculateHeight()
+          this._calculateHeight() // 计算属性的高度
         })
       }
     })
