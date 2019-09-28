@@ -78,7 +78,16 @@ export default {
   },
   computed: {
     currentIndex () {
+      // scrollY 垂直滚动的像素数
+      // this.height 不同类型的商品在右侧的范围
+
+      // 功能:
+      // 根据滚动条垂直滚动的距离 来决定 商品分类 所在的位置
+      // 例子:
+      // 如果在热销榜（h0 到 h1 的范围内），则返回 0
+      // 如果在单人精彩套餐(h1 到 h2 的范围内)， 则返回 1
       for (let i = 0; i < this.height.length; i++) {
+        // 自提地址信息是不一致的情况下
         let height1 = this.height[i]
         let height2 = this.height[i + 1]
         if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
@@ -110,7 +119,7 @@ export default {
         this.goods = response.data
         this.$nextTick(() => {
           this._initScroll()
-          this._calculateHeight() // 计算属性的高度
+          this._calculateHeight()
         })
       }
     })
@@ -129,9 +138,12 @@ export default {
       })
     },
     _calculateHeight () {
+      // 功能：求出每个分类的高度，并存放到数组中
       let foodList = document.querySelectorAll('.shoplists')
       for (var i = 0; i < foodList.length; i++) {
         // 将距离顶部的高度放到
+        // foodList[i].offsetHeight 返回元素的高度。包括内边距和边框
+        // 求出每个分类的高度
         let newHeight = this.height[i] + foodList[i].offsetHeight
         this.height.push(newHeight)
       }

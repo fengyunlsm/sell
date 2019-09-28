@@ -16,10 +16,31 @@ Vue.use(VueResource)
 // let app = Vue.extend(App)
 // let router = new VueRouter()
 const routes = [
-  {path: '/', component: goods},
-  {path: '/goods', component: goods},
-  {path: '/comments', component: comments},
-  {path: '/ratings', component: ratings}
+  {
+    path: '/',
+    component: goods
+  },
+  {
+    path: '/goods',
+    component: goods,
+    meta: {
+      keepAlive: true
+    }
+  },
+  {
+    path: '/comments',
+    component: comments,
+    meta: {
+      keepAlive: false
+    }
+  },
+  {
+    path: '/ratings',
+    component: ratings,
+    meta: {
+      keepAlive: false
+    }
+  }
 ]
 
 const router = new VueRouter({

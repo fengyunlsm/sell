@@ -12,21 +12,28 @@
           <router-link to="/comments">商家</router-link>
       </div>
     </div>
-    <router-view :seller="seller"></router-view>
+      <keep-alive>
+        <router-view :seller="seller" v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+      <router-view :seller="seller" v-if="!$route.meta.keepAlive"></router-view>
+
+    <!-- <router-view ></router-view> -->
     <!-- <router-view :ratings="ratings"></router-view> -->
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 import header from './components/header/header.vue'
+
 const ERR_OK = 0
-  export default {
-    data: function () {
-      return {
-        seller: {},
-        ratings: {}
-      }
-    },
+
+export default {
+  data: function () {
+    return {
+      seller: {},
+      ratings: {}
+    }
+  },
     created: function () {
       this.$http.get('/api/seller').then((response) => {
         response = response.body

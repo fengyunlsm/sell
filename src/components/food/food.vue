@@ -111,7 +111,6 @@ export default {
     selectEval () {
       // 根据标签和内容显示与否 来显示评论
       let resultByLabel = this.filterByLabel(this.selectType)
-      console.log('resultByLabel:', resultByLabel)
       let result = this.filterByContent(resultByLabel, this.contentType)
       return result
     }
@@ -142,7 +141,6 @@ export default {
       // 根据标签来筛选评论
       if (filterType === 0) {
         // 全部, 这里显示默认为空
-        console.log('this.food.ratings:', this.food)
         return this.food.ratings
       } else {
         let newFilterType = filterType - 1

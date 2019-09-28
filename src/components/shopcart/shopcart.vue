@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="shopcart">
-    <div class="background" v-show="this.isShowShopCart" @click="closeCart">
+    <div class="background" v-show="this.isShowShopCart" @click="shopcartStatus = false">
     </div>
     <div class="content" @click="isClickShopcart">
       <div class="content-left">
@@ -105,16 +105,10 @@ export default {
         shopcartStatus: false
     }
   },
-
-  created () {
-    console.log('shopcart start')
-  },
   computed: {
-    // 商品总价 = sum(商品数量 * 商品单价)
-    //
-    // 商品数量 goodsList.length    商品单价 goodsList[i].price
-    // goodsList 是未知
+
     sumPrice () {
+      // 商品总价 = sum(商品数量 * 商品单价)
       let sumPrice = 0
       // for (var i = 0; i < this.shopsCount(); i++) {
       //   sumPrice = sumPrice + this.goodsList[i].price
@@ -125,11 +119,11 @@ export default {
       })
       return sumPrice
     },
-    // 当购物车有数量的时候 ， 购物车样式发生改变， 价格亮度发生改变
-    // 如果 sumPrice = 0, 则返回  ¥ 20元起送
-    // 如果 0 < sumPrice < 20, 则返回 还差¥ (20-sumPrice)元起送
-    // 如果 sumPrice >= 20，则返回  去结算 并且样式变成绿色
     settlementStatus () {
+      // 当购物车有数量的时候 ， 购物车样式发生改变， 价格亮度发生改变
+      // 如果 sumPrice = 0, 则返回  ¥ 20元起送
+      // 如果 0 < sumPrice < 20, 则返回 还差¥ (20-sumPrice)元起送
+      // 如果 sumPrice >= 20，则返回  去结算 并且样式变成绿色
       let remainPrice = 0
       if (this.sumPrice === 0) {
         return '¥ 20元起送'
@@ -163,18 +157,13 @@ export default {
       // 如果没有，则关闭弹窗， 显示内容
       // 再次被点击则关闭前端窗口
       if (this.shopcartStatus && this.goodsList.length > 0) {
-        console.log('showShopCart: ', 'true')
         return true
       } else {
-        console.log('showShopCart: ', 'false')
         return false
       }
     }
   },
   methods: {
-    closeCart () {
-      this.shopcartStatus = false
-    },
     isClickShopcart () {
       if (!this.shopcartStatus) {
         // 设置为真
@@ -186,7 +175,6 @@ export default {
       return this.shopcartStatus
     },
     drop (el) {
-      console.log('el', el)
       for (let i = 0; i < this.balls.length; i++) {
         let ball = this.balls[i]
         if (!ball.show) {
@@ -199,6 +187,10 @@ export default {
     },
     beforeEnter (el) {
       // 求出add-dom 距离购物车的x，y距离
+      // el 当前的DOM
+      // window.innerHeight 浏览器视口高度
+      // top left right bottom 距离视口的位置
+      // transform 属性向元素应用2D 到 3D 的转换
       // 起始状态
       for (let i = 0; i < this.balls.length; i++) {
         let ball = this.balls[i]
@@ -207,7 +199,7 @@ export default {
           let x = rect.left - 32
           let y = -(window.innerHeight - rect.top - 22)
           el.style.display = ''
-          el.style.webkitTransform = `translate3d(0, ${y}px, 0)`
+          el.style.webkitTransform = `translate3d(0, ${y}px, 0)` // 考虑了兼容性问题
           el.style.transform = `translate3d(0, ${y}px, 0)`
           let inner = el.getElementsByClassName('inner-hook')[0]
           inner.style.webkitTransform = `translate3d(${x}px, 0, 0)`
@@ -222,7 +214,7 @@ export default {
         this.$nextTick(() => {
           el.style.webkitTransform = 'translate3d(0, 0, 0)'
           el.style.transform = 'translate3d(0, 0, 0)'
-          let inner = el.getElementsByClassName('inner-hook')[0]
+          let inner = el.getElementsByClassName('inner-hook')[0] // inner-hoot 是什么意思
           inner.style.webkitTransform = 'translate3d(0, 0, 0)'
           inner.style.transform = 'translate3d(0, 0, 0)'
         })
@@ -236,19 +228,9 @@ export default {
         }
       },
       clearShopcart () {
-        // 清空购物车
-        // 关闭购物车
-        // 将购物车数量清零
-        // 数量还在
-        // 购物车件数仍旧存在
-        // this.goodsList.splice(0, this.goodsList.length)
-        // 设置一定
         this.shopcartStatus = false
         this.$emit('clear')
-        console.log('this.goodsList: ', this.goodsList)
       }
-      // 点击下方，如果有商品，则弹出列表窗口;否则，不显示
-      // how to make money
   },
   components: {
     'cartcontrol': cartcontrol

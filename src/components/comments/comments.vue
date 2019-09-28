@@ -106,16 +106,10 @@ export default {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
   },
   methods: {
-    // 方法参数
-    //
     pictureScroll () {
       let picWidth = 120
       let margin = 6
-      // console.log(this.seller.pics.length)
       let width = (picWidth + margin) * this.seller.pics.length - margin
-      // console.log('width:' + width)
-
-      // 默认有六个li子元素，每个子元素的宽度为120px
      this.$refs.picWrapper.style.width = width + 'px'
      this.$nextTick(() => {
        if (!this.scroll) {
