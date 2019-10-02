@@ -190,40 +190,44 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus">
 @import "../../common/stylus/mixin.styl"
+@import "../../common/style.css"
+
 
 .goods
   display: flex
   position: absolute
-  top: 174px
-  bottom: 58px
+  top: 348px
+  bottom: 561px
   overflow: hidden
   width: 100%
+  height: 100%
   .menu-wrapper
-    width: 80px
+    width: 160px
     background: #f3f5f7
     .item-menu
       cursor: pointer
       position: relative
       display: table
-      height: 54px
-      width: 56px
-      padding: 0 12px
+      height: 108px
+      width: 112px
+      padding: 0 24px
       font-size: 0px
       .each-item
         display: table-cell
         vertical-align: middle
         font-size: 0px
-        border-bottom: 1px solid rgba(7, 17, 27, 0.1)
+        border: 1px solid transparent
+        border-image: svg(1px-border param(--color red)) 2 2 stretch
         .icon
           display: inline-block
           position: relative
-          width: 12px
-          height: 12px
-          padding-bottom: 2px
-          margin-right: 1px
-          background-size: 12px 12px
+          width: 24px
+          height: 24px
+          padding-bottom: 4px
+          margin-right: 2px
+          background-size: 24px 24px
           background-repeat: no-repeat
-          top: 2px
+          top: 4px
           &.decrease
             bg-image('decrease_3')
           &.discount
@@ -235,18 +239,18 @@ export default {
           &.special
             bg-image('special_3')
         .title
-          font-size: 12px
+          font-size: 24px
           color: #6d7073
-          line-height: 14px
+          line-height: 28px
           font-weight: 200
           &.current
             color: rgb(7, 17, 27)
             font-size: 12px
-            line-height: 14px
+            line-height: 28px
             font-weight: 600
       &.current
         position: relative
-        z-index: 10
+        z-index: 20
         margin-top: -1px
         background: #fff
         font-weight: 700
@@ -255,72 +259,72 @@ export default {
     width: 100%
     .shop
       .title
-        height: 26px
-        border-left: 2px solid #d9dde1
-        padding-left: 14px
+        height: 52px
+        border-left: 4px solid #d9dde1
+        padding-left: 28px
         background-color: #f3f5f7
-        font-size: 12px
+        font-size: 24px
         color: rgb(147, 153, 159)
-        line-height: 26px
+        line-height: 52px
       .package-information
         position: relative
-        padding: 18px 18px
+        padding: 36px 36px
         font-size: 0px
         border-bottom: 1px solid rgba(7, 17, 27, 0.1)
         .picture
           cursor: pointer
           display: inline-block
-          marign-right: 10px
-          background-size: 12px 12px
+          marign-right: 20px
+          background-size: 24px 24px
           background-repeat: no-repeat
         .detail
           display: inline-block
           vertical-align: top
-          margin-left: 10px
-          margin-top: 2px
+          margin-left: 20px
+          margin-top: 4px
           position: absolute
           .name
-            font-size: 14px
+            font-size: 28px
             color: rgb(7, 17, 27)
-            line-height: 14px
-            margin-bottom: 8px
+            line-height: 28px
+            margin-bottom: 16px
           .description
-            margin: 8px 0px
-            font-size: 10px
+            margin: 16px 0px
+            font-size: 20px
             color: rgb(147, 153, 159)
-            line-height: 15px
+            line-height: 30px
           .sale-information
-            margin: 8px 0px
+            margin: 16px 0px
             font-size: 0px
             color: rgb(147, 153, 159)
-            line-height: 10px
+            line-height: 20px
             .sellcount
-              margin-right: 12px
-              font-size: 10px
+              margin-right: 24px
+              font-size: 20px
             .rating
-              margin-right: 12px
-              font-size: 10px
+              margin-right: 24px
+              font-size: 20px
           .price
             display: inline-block
-            margin-top: 8px
-            margin-right: 8px
+            margin-top: 16px
+            margin-right: 16px
             .new-price
-              margin-right: 8px
-              font-size: 14px
+              margin-right: 16px
+              font-size: 28px
               color: rgb(240, 20, 20)
-              font-weight: 350
-              line-weight: 24px
+              font-weight: 750
+              line-weight: 28px
             .old-price
               margin-left: 0px
-              font-size: 10px
+              font-size: 20px
               color: rgb(147, 153, 159)
               font-weight: normal/700
-              line-weight: 24px
+              line-weight: 48px
         .cart
           position: absolute
-          width: 48px
-          height: 24px
+          width: 96px
+          height: 48px
           right: 0px
-          bottom: 18px
+          bottom: 36px
 
 </style>

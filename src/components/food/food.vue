@@ -214,8 +214,8 @@ export default {
     position: fixed
     left: 0
     top: 0
-    bottom: 48px
-    z-idnex: 30px
+    bottom: 96px
+    z-idnex: 60px
     height: 100%
     width: 100%
     overflow: auto
@@ -245,63 +245,63 @@ export default {
           position: absolute
           left: 0px
           top: 10px
-          padding: 2px 2px
+          padding: 4px 4px
           .icon-arrow_lift
             display: block
-            font-size: 20px
+            font-size: 40px
             color: #fff
       .content-detail
         position: relative
-        padding: 18px 18px 0px 18px
+        padding: 36px 36px 0px 36px
         .food-header
-          marign-bottom:18px
-          font-size: 14px
+          marign-bottom:36px
+          font-size: 28px
           font-weight: 700
           color: rgb(7, 17, 27)
-          line-height: 14px
+          line-height: 28px
         .detail
-          margin-top: 8px
-          marign-bottom: 18px
+          margin-top: 16px
+          marign-bottom: 36px
           .detail-sellcount
-            font-size: 10px
+            font-size: 20px
             color: rgb(147, 153, 159)
-            line-height: 10px
-            marign-right: 12px
+            line-height: 20px
+            marign-right: 24px
           .detail-rating
-            font-size: 10px
+            font-size: 20px
             color: rgb(147, 153, 159)
-            line-height: 10px
-            margin-left: 12px
+            line-height: 20px
+            margin-left: 24px
         .price
           display: inline-block
-          margin-top: 18px
-          margin-right: 8px
-          margin-bottom: 18px
+          margin-top: 36px
+          margin-right: 16px
+          margin-bottom: 36px
           .new-price
-            margin-right: 8px
-            font-size: 14px
+            margin-right: 16px
+            font-size: 28px
             color: rgb(240, 20, 20)
             font-weight: 350
-            line-weight: 24px
+            line-weight: 48px
           .old-price
             margin-left: 0px
-            font-size: 10px
+            font-size: 20px
             color: rgb(147, 153, 159)
             font-weight: normal/700
-            line-weight: 24px
+            line-weight: 48px
         .shopcart-wrapper
           display: inline-block
           position: absolute
-          width: 74px
-          height: 24px
-          right: 18px
-          bottom: 18px
+          width: 148px
+          height: 48px
+          right: 36px
+          bottom: 36px
           .buy
             display: table
-            z-index: 5px
-            width: 74px
-            height: 24px
-            border-radius: 12px
+            z-index: 10px
+            width: 148px
+            height: 48px
+            border-radius: 24px
             background-color: rgb(0, 160, 220)
             text-align: center
             cursor: pointer
@@ -324,72 +324,72 @@ export default {
           position: absolute
           left: 0px
           top: 0px
-          padding-bottom: 6px
-          font-size: 14px
+          padding-bottom: 12px
+          font-size: 28px
           color: rgb(7, 17, 27)
-          line-height: 14px
+          line-height: 28px
           font-weight: 700
         .contents
           position: relative
-          top: 10px
+          top: 20px
           display: block
-          padding: 6px 8px 0px 8px
-          font-size: 12px
+          padding: 12px 16px 0px 16px
+          font-size: 24px
           font-weight: 200
           color: rgb(77, 85, 93)
-          line-height: 24px
+          line-height: 48px
       .commodity-evaluate
-        margin: 18px 18px
+        margin: 36px 36px
         .headers
-          margin-bottom: 6px
-          font-size: 14px
+          margin-bottom: 12px
+          font-size: 28px
           color: rgb(7, 17, 27)
-          line-height: 14px
+          line-height: 28px
           font-weight: 700
       .comments-wrapper
-        margin: 16px 18px 0px 18px
+        margin: 32px 36px 0px 36px
         .user-info
           position: relative
           .time
             display: inline-block
-            margin-bottom: 6px
-            font-size: 10px
+            margin-bottom: 12px
+            font-size: 20px
             color: rgb(147, 153, 159)
-            line-height: 12px
+            line-height: 24px
           .username
             display: inline-block
             position: absolute
             top: 0px
-            right: 18px
-            margin: 0px 6px 6px 0px
-            font-size: 10px
+            right: 36px
+            margin: 0px 12px 12px 0px
+            font-size: 20px
             color: rgb(147, 153, 159)
-            line-height: 12px
+            line-height: 24px
           .user-avater
             display: inlibe-block
             position: absolute
             top: 0px
             right: 0px
-            width: 12px
+            width: 24px
             height: 12px
             border-radius: 50%
         .user-comment
           position: relative
-          margin: 6px 0px 16px 0px
-          font-size: 1px
+          margin: 12px 0px 32px 0px
+          font-size: 2px
           .icon
             display: inline-block
-            margin-right: 4px
-            font-size: 12px
-            line-height: 24px
+            margin-right: 8px
+            font-size: 24px
+            line-height: 48px
             &.icon-thumb_up
               color: rgb(0, 160, 220)
             &.icon-thumb_down
               color: rgb(147, 153, 159)
           .comment
             vertical-align: center
-            margin-left: 4px
-            font-size: 12px
+            margin-left: 8px
+            font-size: 24px
             color: rgb(7, 17, 27)
-            line-height: 16px
+            line-height: 32px
 </style>

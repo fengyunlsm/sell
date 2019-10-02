@@ -137,38 +137,38 @@ export default {
 @import "../../common/stylus/mixin.styl"
 
 .seller-wrapper
-  margin: 18px 18px
+  margin: 36px 36px
   .title-wrapper
     position: relative
-    margin-bottom: 18px
+    margin-bottom: 36px
     .title-header
       display: inline-block
       .title
-        margin-bottom: 8px
-        font-size: 14px
+        margin-bottom: 16px
+        font-size: 28px
         color: rgb(7, 17, 27)
-        line-height: 14px
+        line-height: 28px
       .description
         display: table
         postion: relative
-        margin-top: 8px
+        margin-top: 16px
         font-size: 0px
         .star-wrapper
           /* position: absolute */
           display: inline-block
           left: 0px
-          margin-right: 8px
+          margin-right: 16px
         .ratingCount
           display: inline-block
-          margin-right: 12px
-          font-size: 10px
+          margin-right: 24px
+          font-size: 20px
           color: rgb(77, 85, 93)
-          line-height: 18px
+          line-height: 36px
         .sellcount
           display: inline-block
-          font-size: 10px
+          font-size: 20px
           color: rgb(77, 85, 93)
-          line-height: 18px
+          line-height: 36px
     .collection
       display: inline-block
       text-align: center
@@ -176,97 +176,97 @@ export default {
       right: 0px
       bottom: 0px
       .icon-favorite
-        margin-bottom: 8px
-        font-size: 24px
+        margin-bottom: 16px
+        font-size: 48px
         color: rgb(240, 20, 20)
-        line-height: 24px
+        line-height: 48px
       .favorite-status
-        margin-top: 8px
-        font-size: 10px
+        margin-top: 16px
+        font-size: 20px
         color: rgb(77, 85, 93)
-        line-height: 10px
+        line-height: 20px
   .detail-wrapper
     display: flex
-    margin: 18px 0px
+    margin: 36px 0px
     border-top: 1px solid rgba(7, 17, 27, 0.1)
     .minprice
       flex: 1
       text-align: center
       position: relative
-      margin-top: 18px
+      margin-top: 36px
       border-right: 1px solid rgba(7, 17, 27, 0.1)
       .title
         postion: absolute
-        margin-bottom: 4px
-        font-size: 10px
+        margin-bottom: 8px
+        font-size: 20px
         color: rgb(147, 153, 159)
-        line-height: 10px
+        line-height: 20px
       .price
-        margin-top: 10px
+        margin-top: 20px
         font-weight: 200
         color: rgb(7, 17, 27)
-        line-height: 24px
+        line-height: 48px
     .deliveryprice
       flex: 1
       text-align: center
-      margin-top: 18px
+      margin-top: 36px
       border-right: 1px solid rgba(7, 17, 27, 0.1)
       .title
-        margin-bottom: 4px
-        font-size: 10px
+        margin-bottom: 8px
+        font-size: 20px
         color: rgb(147, 153, 159)
-        line-height: 10px
+        line-height: 20px
       .price
-        margin-top: 10px
+        margin-top: 20px
         font-weight: 200
         color: rgb(7, 17, 27)
-        line-height: 24px
+        line-height: 48px
     .deliverytime
       flex: 1
       text-align: center
       .title
-        margin-top: 18px
+        margin-top: 36px
         postion: absolute
-        top: 18px
-        margin-bottom: 4px
-        font-size: 10px
+        top: 36px
+        margin-bottom: 8px
+        font-size: 20px
         color: rgb(147, 153, 159)
-        line-height: 10px
+        line-height: 20px
       .time
-        margin-top: 10px
+        margin-top: 20px
         font-weight: 200
         color: rgb(7, 17, 27)
-        line-height: 24px
+        line-height: 48px
   .bulletin-wrapper
-    padding: 18px 18px 16px 18px
+    padding: 36px 36px 32px 32px
     border-bottom: 1px solid rgba(7, 17, 27, 0.1)
     .title
-      font-size: 14px
+      font-size: 28px
       color: rgb(7, 17, 27)
-      line-height: 14px
-      margin-bottom: 8px
+      line-height: 28px
+      margin-bottom: 16px
       font-weight: 600
     .bulletin
-      margin: 8px 12px 0px 12px
-      font-size: 12px
+      margin: 16px 24px 0px 24px
+      font-size: 24px
       font-weight: 200
       color: rgb(240, 20, 20)
-      line-height: 24px
+      line-height: 48px
   .support-wrapper
     position: relative
-    margin: 0px 16px 0px 18px
+    margin: 0px 32px 0px 36px
     .each-supports
-      padding: 16px 12px
+      padding: 32px 24px
       border-bottom: 1px solid rgba(7, 17, 27, 0.1)
       .brand
         display: inline-block
         vertical-align: middle
-        width: 16px
-        height: 16px
-        padding-right: 6px
-        line-height: 16px
+        width: 32px
+        height: 32px
+        padding-right: 12px
+        line-height: 32px
         vertical-align: center
-        background-size: 16px 16px
+        background-size: 32px 32px
         background-repeat: no-repeat
         &.decrease
           bg-image('decrease_1')
@@ -280,17 +280,17 @@ export default {
           bg-image('special_1')
       .description
         display: inline-block
-        font-size: 12px
+        font-size: 23px
         font-weight: 200
         color: rgb(7, 17, 27)
-        line-height: 16px
+        line-height: 32px
   .realscence-wrapper
-    padding: 18px 18px
+    padding: 36px 36px
     .title
-      font-size: 14px
+      font-size: 28px
       color: rgb(7, 17, 27)
-      line-height: 14px
-      padding-bottom: 12px
+      line-height: 28px
+      padding-bottom: 24px
       font-weight: 600
     .picture
       cursor: pointer
@@ -302,28 +302,28 @@ export default {
         .each-picture
           pointer-events: none
           display: inline-block
-          width: 120px
-          height: 90px
-          padding-right: 6px
+          width: 240px
+          height: 180px
+          padding-right: 12px
           background-repeat: no-repeat
   .info-wrapper
-    margin: 18px 18px
+    margin: 36px 36px
     .title
-      margin-bottom: 12px
-      font-size: 14px
+      margin-bottom: 24px
+      font-size: 28px
       color: rgb(7, 17, 27)
-      line-height: 14px
+      line-height: 28px
       font-weight: 600
     .info
       .info-wrappers
         position: relative
         .each-info
-          padding-left: 12px
-          padding-top: 16px
-          padding-bottom: 16px
+          padding-left: 24px
+          padding-top: 32px
+          padding-bottom: 32px
           border-top: 1px solid rgba(7, 17, 27, 0.1)
-          font-size: 12px
+          font-size: 24px
           font-weight: 200
           color: #07111b
-          line-height: 16px
+          line-height: 32px
 </style>

@@ -245,9 +245,9 @@ export default {
   position: fixed
   bottom: 0
   left: 0
-  height: 54px
+  height: 108px
   width: 100%
-  z-index: 50
+  z-index: 100
   .background
     position: fixed
     left: 0px
@@ -265,11 +265,11 @@ export default {
       .logo-wrapper
         display: inline-block
         position: relative
-        width: 44px
-        height: 44px
-        padding: 6px
-        margin: 0px 12px
-        top: -10px
+        width: 88px
+        height: 88px
+        padding: 12px
+        margin: 0px 24px
+        top: -20px
         border-radius: 50%
         background: #141d27
         .logo
@@ -283,10 +283,10 @@ export default {
             background-color: rgb(0, 160, 220)
           .icon-shopping_cart
             position: absolute
-            line-height: 44px
-            font-size: 24px
+            line-height: 88px
+            font-size: 48px
             color: #80858a
-            left: 10px   // 使用计算的方法进行居中
+            left: 20px
             &.shopping-cart-hightline
               color: white
         .stuffs-count
@@ -294,51 +294,51 @@ export default {
           position: absolute
           top: 0px
           right: 0px
-          width: 24px
-          height: 12px
-          font-size: 9px
+          width: 48px
+          height: 24px
+          font-size: 18px
           font-weight: 700
-          border-radius: 6px
+          border-radius: 12px
           color: rgb(255, 255, 255)
-          line-height: 12px
+          line-height: 24px
           background-color: rgb(240, 20, 20)
-          box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.4)
+          box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4)
           text-align: center
       .price
         display: inline-block
         position: absolute
-        padding-right: 12px
+        padding-right: 24px
         border-right: 1px solid rgba(255, 255, 255, 0.1)
-        font-size: 16px
+        font-size: 32px
         color: rgba(255, 255, 255, 0.4)
         font-weight: 700
-        line-weight: 24px
-        margin-top: 12px
-        height: 30px
-        margin-bottom: 12px
-        line-height: 30px
+        line-weight: 48px
+        margin-top: 24px
+        height: 60px
+        margin-bottom: 24px
+        line-height: 60px
         box-sizing: border-box
         &.price-hightline
           color: white
       .description
         display: inline-block
         vertical-align: top
-        margin: 0 50px
-        font-size: 16px
+        margin: 0 100px
+        font-size: 32px
         color: rgba(255, 255, 255, 0.4)
         font-weight: 700
-        line-height: 54px
+        line-height: 108px
     .content-right
       position: absolute
       right: 0px
       bottom: 0px
-      width: 105px
-      height: 54px
-      margin-left: 8px
-      font-size: 12px
+      width: 210px
+      height: 108px
+      margin-left: 16px
+      font-size: 24px
       color: rgba(255, 255, 255, 0.4)
       font-weight: 700
-      line-height: 54px
+      line-height: 108px
       text-align: center
       background-color: #2b333b
       &.content-right-hightline
@@ -348,13 +348,13 @@ export default {
   .ball-container
     .ball
       position: fixed
-      left: 32px
-      bottom: 22px
+      left: 64px
+      bottom: 44px
       z-index: 200px
       transition: all 0.4s cubic-bezier(.25, -0.69, .58, .78)
       .inner
-        width: 16px
-        height: 16px
+        width: 32px
+        height: 32px
         border-radius: 50%
         background: rgb(0, 160, 220)
         transition: all 0.4s linear
@@ -373,49 +373,49 @@ export default {
       transform translate3d(0, 0, 0)
     }
     .shopcart-header
-      height: 40px
-      line-height: 40px
-      padding: 0px 18px
+      height: 80px
+      line-height: 80px
+      padding: 0px 36px
       background: #f3f5f7
       border-bottom: 1px solid rgba(7, 17, 27, 0.1)
       .cart-header
         float: left
-        font-size: 14px
+        font-size: 28px
         color: rgb(7, 17, 27)
       .clear
         float: right
-        font-size: 12px
+        font-size: 24px
         color: rgb(0, 160, 220)
         cursor: pointer
     .shopcart-content
-      padding: 0 18px
-      max-height: 217px
+      padding: 0 36px
+      max-height: 434px
       background-color: #ffffff
       overflow: auto
       .shopcart-list
         position: relative
-        padding: 12px 0
+        padding: 24px 0
         box-sizing: border-box
         border-1px(rgba(7, 17, 27, 0.1))
         .name
           display: inline-block
-          fonts-size: 14px
+          fonts-size: 28px
           color: rgb(7, 17, 27)
-          line-height: 24px
+          line-height: 48px
         .price
           display: inline-block
           position: absolute
-          bottom: 12px
-          right: 90px
-          font-size: 14px
+          bottom: 24px
+          right: 180px
+          font-size: 28px
           color: rgb(240, 20, 20)
-          line-height: 24px
+          line-height: 48px
           font-weight: 700
         .cartcontrol-wrapper
           display: inline-block
           position: absolute
-          width: 72px
-          height: 24px
+          width: 144px
+          height: 48px
           right: 0px
-          bottom: 12px
+          bottom: 24px
 </style>

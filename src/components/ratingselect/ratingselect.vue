@@ -139,18 +139,18 @@ export default {
     display: inline-block
     position: relative
     cursor: pointer
-    margin-right: 8px
-    width: 80px
-    height: 35px
-    font-size: 12px
+    margin-right: 16px
+    width: 160px
+    height: 70px
+    font-size: 24px
     color: rgb(77, 85, 93)
-    line-height: 16px
+    line-height: 32px
     background-color: rgb(0, 160, 220)
-    border-radius: 2px
+    border-radius: 4px
     &.on
       color: #07111b
       font-weight: 600
-      border: 0.5px solid black
+      border: 1px solid black
     .all-swapper
       position: absolute
       display: inline-block
@@ -165,18 +165,18 @@ export default {
     cursor: pointer
     display: inline-block
     position: relative
-    margin-right: 8px
-    width: 80px
-    height: 35px
-    font-size: 12px
+    margin-right: 16px
+    width: 160px
+    height: 70px
+    font-size: 24px
     color: rgb(77, 85, 93)
-    line-height: 16px
-    border-radius: 2px
+    line-height: 32px
+    border-radius: 4px
     background-color: rgba(0, 160, 220, 0.2)
     &.on
       color: #07111b
       font-weight: 600
-      border: 0.5px solid black
+      border: 1px solid black
     .positive-swapper
       position: absolute
       top: 50%
@@ -190,17 +190,17 @@ export default {
     cursor: pointer
     position: relative
     display: inline-block
-    width: 80px
-    height: 35px
-    font-size: 12px
+    width: 160px
+    height: 70px
+    font-size: 24px
     color: rgb(77, 85, 93)
-    line-height: 16px
-    border-radius: 2px
+    line-height: 32px
+    border-radius: 4px
     background-color: rgba(77, 85, 93, 0.2)
     &.on
       color: #07111b
       font-weight: 600
-      border: 0.5px solid black
+      border: 1px solid black
     .negative-swapper
       position: absolute
       top: 50%
@@ -211,20 +211,20 @@ export default {
       .negative-number
         display: inline-block
 .select
-  padding: 18px 0px 0px 0px
+  padding: 36px 0px 0px 0px
   .icon-check_circle
     cursor: pointer
     display: inline-block
     vertical-align: middle
-    padding-right: 4px
-    font-size: 24px
+    padding-right: 8px
+    font-size: 48px
     color: rgb(147, 153, 159)
-    line-height: 24px
+    line-height: 48px
     &.content-status
       color: green
   .explain
     display: inline-block
-    font-size: 12px
+    font-size: 24px
     color: rgb(147, 153, 159)
-    line-height: 24px
+    line-height: 48px
 </style>

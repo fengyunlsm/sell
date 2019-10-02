@@ -117,43 +117,43 @@
   .content-wrapper
     font-size: 0px
     position: relative
-    padding: 24px 12px 18px 24px
+    padding: 48px 24px 36px 48px
     .avatar
       display: inline-block
       vertical-align: top
     .content
       display: inline-block
-      font-size: 12px
-      padding-left: 16px
+      font-size: 24px
+      padding-left: 32px
       .title
-        margin: 2px 0px 8px 0px
+        margin: 4px 0px 16px 0px
         .brand
           display: inline-block
           vertical-align: top
-          width:30px
-          height:18px
+          width:60px
+          height:36px
           bg-image("brand")
-          background-size: 30px 18px
+          background-size: 60px 36px
           background-repeat: no-repeat
         .name
-          margin-left: 6px
-          font-size: 16px
+          margin-left: 12px
+          font-size: 32px
           font-weight:blod
-          line-height: 18px
+          line-height: 36px
       .description
-        padding-bottom: 10px
-        font-size: 12px
+        padding-bottom: 20px
+        font-size: 24px
         font-weight: 200
-        line-height: 12px
+        line-height: 24px
       .supports
         .icon
           display: inline-block
           vertical-align:top
-          width: 12px
-          height: 12px
-          padding-bottom: 2px
-          margin-right: 4px
-          background-size: 12px 12px
+          width: 24px
+          height: 24px
+          padding-bottom: 4px
+          margin-right: 8px
+          background-size: 24px 24px
           background-repeat: no-repeat
           &.decrease
             bg-image('decrease_1')
@@ -166,37 +166,37 @@
           &.special
             bg-image('special_1')
         .text
-          font-size: 10px
+          font-size: 20px
           font-weight: 100
-          line-weight: 12px
+          line-weight: 24px
     .support-count
       cursor: pointer
       position: absolute
-      right: 12px
-      bottom: 24px
-      height: 24px
-      padding: 0 8px
-      font-size: 10px
-      line-height: 24px
-      border-radius: 12px
+      right: 24px
+      bottom: 48px
+      height: 48px
+      padding: 0 16px
+      font-size: 20px
+      line-height: 48px
+      border-radius: 24px
       background: rgba(0, 0, 0, 0.2)
       text-align: center
       .supports-swapper
         .count
           display: inline-block
-          font-size: 10px
+          font-size: 20px
           color: rgb(255, 255, 255)
           font-weight: 200
-          line-height: 12px
+          line-height: 24px
         .icon-keyboard_arrow_right
           display: inline-block
   .bulletin-wrapper
     cursor: pointer
     display: block
     position: relative
-    padding: 0px 22px 0px 12px
-    height: 28px
-    line-height: 28px
+    padding: 0px 44px 0px 24px
+    height: 56px
+    line-height: 56px
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
@@ -205,20 +205,20 @@
     .notice
       display: inline-block
       vertical-align: middle
-      width: 22px
-      height: 12px
-      background-size: 22px 12px
+      width: 44px
+      height: 24px
+      background-size: 44px 24px
       background-repeat: no-repeat
       bg-image("bulletin")
     .introduce
       vertical-align: middle
-      margin: 0px 4px 0px 4px
-      font-size: 10px
+      margin: 0px 8px 0px 8px
+      font-size: 20px
       font-weight: 100
     .icon-keyboard_arrow_right
       position: absolute
-      font-size: 10px
-      right: 12px
+      font-size: 20px
+      right: 24px
       top: 50%
       transform: translate(0, -50%)
   .background
@@ -238,7 +238,7 @@
     overflow: auto
     background-color: rgba(7, 17, 27, 0.8)
     blur: (10px)
-    z-index: 100
+    z-index: 150
     transition: all 0.8s
     &.fade-transition
       opacity: 1
@@ -250,23 +250,23 @@
       min-height: 100%
       .detail-main
         position: relative
-        margin-top: 64px
-        margin-bottom: 64px
-        margin-left: 36px
-        margin-right: 36px
+        margin-top: 128px
+        margin-bottom: 128px
+        margin-left: 72px
+        margin-right: 72px
         .name
           display: relative
-          font-size: 16px
+          font-size: 32px
           font-weight: 700
-          line-height: 16px
+          line-height: 32px
           text-align: center
         .star-wrapper
-          margin-top: 18px
-          padding: 2px 0
+          margin-top: 32px
+          padding: 4px 0
           text-align: center
         .title
           display: flex
-          margin: 30px 0px 24px 0px
+          margin: 60px 0px 48px 0px
           .line
             flex: 1
             display: relative
@@ -274,20 +274,20 @@
             transform: translate(0, -45%)
             border-bottom: 1px solid rgba(255, 255, 255, 0.2)
           .text
-            margin: 0px 12px
+            margin: 0px 24px
         .suports
           position: relative
-          margin: 24px 12px 28px 12px
+          margin: 48px 24px 56px 24px
           .item-supports
             display: relative
             font-size: 0px
             .icon
               display: inline-block
-              width: 16px
-              height: 16px
-              margin-bottom: 12px
-              margin-right: 6px
-              background-size: 16px 16px
+              width: 32px
+              height: 32px
+              margin-bottom: 24px
+              margin-right: 12px
+              background-size: 32px 32px
               background-repeat: no-repeat
               &:last-child
                 margin-bottom: 0px
@@ -303,24 +303,24 @@
                 bg-image('special_2')
             .text
               position: absolute
-              margin-top: 2px
-              font-size: 12px
+              margin-top: 4px
+              font-size: 24px
               font-weight: 100
               color: rgb(255, 255, 255)
-              line-height: 12px
+              line-height: 24px
         .bulletin
           position: relative
           .content
-            margin: 0px 12px
-            font-size: 12px
+            margin: 0px 24px
+            font-size: 24px
             font-weight: 100
             color: rgb(255, 255, 255)
-            line-height: 24px
+            line-height: 48px
     .detail-close
       position: relative
-      width: 32px
-      height: 32px
-      margin: 64px auto 0 auto
+      width: 64px
+      height: 64px
+      margin: 128px auto 0 auto
       clear: both
-      font-size: 32px
+      font-size: 64px
 </style>
