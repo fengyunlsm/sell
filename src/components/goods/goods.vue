@@ -134,6 +134,7 @@ export default {
       let menuwrapper = document.querySelector('.menu-wrapper')
       let menuscroll = new BScroll(menuwrapper, {click: true})
       this.shoplistscroll.on('scroll', (pos) => {
+        // pos 的意思是 什么？
         this.scrollY = Math.abs(Math.round(pos.y))
       })
     },
