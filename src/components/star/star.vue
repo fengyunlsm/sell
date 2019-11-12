@@ -89,7 +89,7 @@ export default {
         marign: auto
         margin-right: 3px
         background-size: 15px 14.5px
-        &: last-child
+        &:last-child
           margin-right: 0
         &.on
           bg-image('star36_on')
@@ -112,7 +112,7 @@ export default {
         height: 20px
         margin-right: 3px
         background-size: 20px 19px
-        &: last-child
+        &:last-child
           margin-right: 0
         &.on
           bg-image('star48_on')
