@@ -140,7 +140,7 @@ export default {
       let count = 0
       // for (var i = 0; i < this.goodsList.length; i++) {
       //   count = count + 1
-      // }
+      //
       // console.log('shopsCount: ', count)
       // return 4
       // 如果this.goodsList 是空怎么处理
