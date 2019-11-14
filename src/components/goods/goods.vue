@@ -134,7 +134,7 @@ export default {
       let menuwrapper = document.querySelector('.menu-wrapper')
       let menuscroll = new BScroll(menuwrapper, {click: true})
       this.shoplistscroll.on('scroll', (pos) => {
-        // pos 的意思是 什么？
+        // pos 的意思是 什么
         this.scrollY = Math.abs(Math.round(pos.y))
       })
     },
@@ -275,7 +275,7 @@ export default {
         .picture
           cursor: pointer
           display: inline-block
-          marign-right: 20px
+          margin-right: 20px
           background-size: 24px 24px
           background-repeat: no-repeat
         .detail
