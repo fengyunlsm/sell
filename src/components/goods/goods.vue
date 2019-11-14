@@ -13,7 +13,7 @@
     </div>
     <div class="shoplist-wrapper" >
         <ul>
-            <li v-for="item in goods" v-bind:key="item.id" class="shop shoplists" >
+            <li v-for="item in goods" v-bind:key="item.id" class="shop shoplists">
               <div class="title">
                 {{item.name}}
               </div>
@@ -78,7 +78,16 @@ export default {
   },
   computed: {
     currentIndex () {
+      // scrollY 垂直滚动的像素数
+      // this.height 不同类型的商品在右侧的范围
+
+      // 功能:
+      // 根据滚动条垂直滚动的距离 来决定 商品分类 所在的位置
+      // 例子:
+      // 如果在热销榜（h0 到 h1 的范围内），则返回 0
+      // 如果在单人精彩套餐(h1 到 h2 的范围内)， 则返回 1
       for (let i = 0; i < this.height.length; i++) {
+        // 自提地址信息是不一致的情况下
         let height1 = this.height[i]
         let height2 = this.height[i + 1]
         if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
@@ -125,13 +134,17 @@ export default {
       let menuwrapper = document.querySelector('.menu-wrapper')
       let menuscroll = new BScroll(menuwrapper, {click: true})
       this.shoplistscroll.on('scroll', (pos) => {
+        // pos 的意思是 什么
         this.scrollY = Math.abs(Math.round(pos.y))
       })
     },
     _calculateHeight () {
+      // 功能：求出每个分类的高度，并存放到数组中
       let foodList = document.querySelectorAll('.shoplists')
       for (var i = 0; i < foodList.length; i++) {
         // 将距离顶部的高度放到
+        // foodList[i].offsetHeight 返回元素的高度。包括内边距和边框
+        // 求出每个分类的高度
         let newHeight = this.height[i] + foodList[i].offsetHeight
         this.height.push(newHeight)
       }
@@ -153,7 +166,6 @@ export default {
       this.$refs.food.setShowFlag()
     },
     incrementTotal (target) {
-      console.log('incrementTotal')
       this.$refs.shopcart.drop(target)
     },
     clear () {
@@ -179,40 +191,44 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus">
 @import "../../common/stylus/mixin.styl"
+@import "../../common/style.css"
+
 
 .goods
   display: flex
   position: absolute
-  top: 174px
-  bottom: 58px
+  top: 348px
+  bottom: 561px
   overflow: hidden
   width: 100%
+  height: 100%
   .menu-wrapper
-    width: 80px
+    width: 160px
     background: #f3f5f7
     .item-menu
       cursor: pointer
       position: relative
       display: table
-      height: 54px
-      width: 56px
-      padding: 0 12px
+      height: 108px
+      width: 112px
+      padding: 0 24px
       font-size: 0px
       .each-item
         display: table-cell
         vertical-align: middle
         font-size: 0px
-        border-bottom: 1px solid rgba(7, 17, 27, 0.1)
+        border: 1px solid transparent
+        border-image: svg(1px-border param(--color red)) 2 2 stretch
         .icon
           display: inline-block
           position: relative
-          width: 12px
-          height: 12px
-          padding-bottom: 2px
-          margin-right: 1px
-          background-size: 12px 12px
+          width: 24px
+          height: 24px
+          padding-bottom: 4px
+          margin-right: 2px
+          background-size: 24px 24px
           background-repeat: no-repeat
-          top: 2px
+          top: 4px
           &.decrease
             bg-image('decrease_3')
           &.discount
@@ -224,92 +240,92 @@ export default {
           &.special
             bg-image('special_3')
         .title
-          font-size: 12px
+          font-size: 24px
           color: #6d7073
-          line-height: 14px
+          line-height: 28px
           font-weight: 200
           &.current
             color: rgb(7, 17, 27)
             font-size: 12px
-            line-height: 14px
+            line-height: 28px
             font-weight: 600
       &.current
         position: relative
-        z-index: 10
+        z-index: 20
         margin-top: -1px
         background: #fff
         font-weight: 700
   .shoplist-wrapper
     position: relative
-    width: 100%
+    width: 80%
     .shop
       .title
-        height: 26px
-        border-left: 2px solid #d9dde1
-        padding-left: 14px
+        height: 52px
+        border-left: 4px solid #d9dde1
+        padding-left: 28px
         background-color: #f3f5f7
-        font-size: 12px
+        font-size: 24px
         color: rgb(147, 153, 159)
-        line-height: 26px
+        line-height: 52px
       .package-information
         position: relative
-        padding: 18px 18px
+        padding: 36px 36px
         font-size: 0px
         border-bottom: 1px solid rgba(7, 17, 27, 0.1)
         .picture
           cursor: pointer
           display: inline-block
-          marign-right: 10px
-          background-size: 12px 12px
+          margin-right: 20px
+          background-size: 24px 24px
           background-repeat: no-repeat
         .detail
           display: inline-block
           vertical-align: top
-          margin-left: 10px
-          margin-top: 2px
+          margin-left: 20px
+          margin-top: 4px
           position: absolute
           .name
-            font-size: 14px
+            font-size: 28px
             color: rgb(7, 17, 27)
-            line-height: 14px
-            margin-bottom: 8px
+            line-height: 28px
+            margin-bottom: 16px
           .description
-            margin: 8px 0px
-            font-size: 10px
+            margin: 16px 0px
+            font-size: 20px
             color: rgb(147, 153, 159)
-            line-height: 15px
+            line-height: 30px
           .sale-information
-            margin: 8px 0px
+            margin: 16px 0px
             font-size: 0px
             color: rgb(147, 153, 159)
-            line-height: 10px
+            line-height: 20px
             .sellcount
-              margin-right: 12px
-              font-size: 10px
+              margin-right: 24px
+              font-size: 20px
             .rating
-              margin-right: 12px
-              font-size: 10px
+              margin-right: 24px
+              font-size: 20px
           .price
             display: inline-block
-            margin-top: 8px
-            margin-right: 8px
+            margin-top: 16px
+            margin-right: 16px
             .new-price
-              margin-right: 8px
-              font-size: 14px
+              margin-right: 16px
+              font-size: 28px
               color: rgb(240, 20, 20)
-              font-weight: 350
-              line-weight: 24px
+              font-weight: 750
+              line-weight: 28px
             .old-price
               margin-left: 0px
-              font-size: 10px
+              font-size: 20px
               color: rgb(147, 153, 159)
               font-weight: normal/700
-              line-weight: 24px
+              line-weight: 48px
         .cart
           position: absolute
-          width: 48px
-          height: 24px
+          width: 96px
+          height: 48px
           right: 0px
-          bottom: 18px
+          bottom: 36px
 
 </style>

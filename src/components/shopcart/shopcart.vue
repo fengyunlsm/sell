@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="shopcart">
-    <div class="background" v-show="this.isShowShopCart" @click="closeCart">
+    <div class="background" v-show="this.isShowShopCart" @click="shopcartStatus = false">
     </div>
     <div class="content" @click="isClickShopcart">
       <div class="content-left">
@@ -105,16 +105,10 @@ export default {
         shopcartStatus: false
     }
   },
-
-  created () {
-    console.log('shopcart start')
-  },
   computed: {
-    // 商品总价 = sum(商品数量 * 商品单价)
-    //
-    // 商品数量 goodsList.length    商品单价 goodsList[i].price
-    // goodsList 是未知
+
     sumPrice () {
+      // 商品总价 = sum(商品数量 * 商品单价)
       let sumPrice = 0
       // for (var i = 0; i < this.shopsCount(); i++) {
       //   sumPrice = sumPrice + this.goodsList[i].price
@@ -125,11 +119,11 @@ export default {
       })
       return sumPrice
     },
-    // 当购物车有数量的时候 ， 购物车样式发生改变， 价格亮度发生改变
-    // 如果 sumPrice = 0, 则返回  ¥ 20元起送
-    // 如果 0 < sumPrice < 20, 则返回 还差¥ (20-sumPrice)元起送
-    // 如果 sumPrice >= 20，则返回  去结算 并且样式变成绿色
     settlementStatus () {
+      // 当购物车有数量的时候 ， 购物车样式发生改变， 价格亮度发生改变
+      // 如果 sumPrice = 0, 则返回  ¥ 20元起送
+      // 如果 0 < sumPrice < 20, 则返回 还差¥ (20-sumPrice)元起送
+      // 如果 sumPrice >= 20，则返回  去结算 并且样式变成绿色
       let remainPrice = 0
       if (this.sumPrice === 0) {
         return '¥ 20元起送'
@@ -146,7 +140,7 @@ export default {
       let count = 0
       // for (var i = 0; i < this.goodsList.length; i++) {
       //   count = count + 1
-      // }
+      //
       // console.log('shopsCount: ', count)
       // return 4
       // 如果this.goodsList 是空怎么处理
@@ -163,18 +157,13 @@ export default {
       // 如果没有，则关闭弹窗， 显示内容
       // 再次被点击则关闭前端窗口
       if (this.shopcartStatus && this.goodsList.length > 0) {
-        console.log('showShopCart: ', 'true')
         return true
       } else {
-        console.log('showShopCart: ', 'false')
         return false
       }
     }
   },
   methods: {
-    closeCart () {
-      this.shopcartStatus = false
-    },
     isClickShopcart () {
       if (!this.shopcartStatus) {
         // 设置为真
@@ -186,7 +175,6 @@ export default {
       return this.shopcartStatus
     },
     drop (el) {
-      console.log('el', el)
       for (let i = 0; i < this.balls.length; i++) {
         let ball = this.balls[i]
         if (!ball.show) {
@@ -199,6 +187,10 @@ export default {
     },
     beforeEnter (el) {
       // 求出add-dom 距离购物车的x，y距离
+      // el 当前的DOM
+      // window.innerHeight 浏览器视口高度
+      // top left right bottom 距离视口的位置
+      // transform 属性向元素应用2D 到 3D 的转换
       // 起始状态
       for (let i = 0; i < this.balls.length; i++) {
         let ball = this.balls[i]
@@ -207,7 +199,7 @@ export default {
           let x = rect.left - 32
           let y = -(window.innerHeight - rect.top - 22)
           el.style.display = ''
-          el.style.webkitTransform = `translate3d(0, ${y}px, 0)`
+          el.style.webkitTransform = `translate3d(0, ${y}px, 0)` // 考虑了兼容性问题
           el.style.transform = `translate3d(0, ${y}px, 0)`
           let inner = el.getElementsByClassName('inner-hook')[0]
           inner.style.webkitTransform = `translate3d(${x}px, 0, 0)`
@@ -222,7 +214,7 @@ export default {
         this.$nextTick(() => {
           el.style.webkitTransform = 'translate3d(0, 0, 0)'
           el.style.transform = 'translate3d(0, 0, 0)'
-          let inner = el.getElementsByClassName('inner-hook')[0]
+          let inner = el.getElementsByClassName('inner-hook')[0] // inner-hoot 是什么意思
           inner.style.webkitTransform = 'translate3d(0, 0, 0)'
           inner.style.transform = 'translate3d(0, 0, 0)'
         })
@@ -236,19 +228,9 @@ export default {
         }
       },
       clearShopcart () {
-        // 清空购物车
-        // 关闭购物车
-        // 将购物车数量清零
-        // 数量还在
-        // 购物车件数仍旧存在
-        // this.goodsList.splice(0, this.goodsList.length)
-        // 设置一定
         this.shopcartStatus = false
         this.$emit('clear')
-        console.log('this.goodsList: ', this.goodsList)
       }
-      // 点击下方，如果有商品，则弹出列表窗口;否则，不显示
-      // how to make money
   },
   components: {
     'cartcontrol': cartcontrol
@@ -263,9 +245,9 @@ export default {
   position: fixed
   bottom: 0
   left: 0
-  height: 54px
+  height: 108px
   width: 100%
-  z-index: 50
+  z-index: 100
   .background
     position: fixed
     left: 0px
@@ -283,11 +265,11 @@ export default {
       .logo-wrapper
         display: inline-block
         position: relative
-        width: 44px
-        height: 44px
-        padding: 6px
-        margin: 0px 12px
-        top: -10px
+        width: 88px
+        height: 88px
+        padding: 12px
+        margin: 0px 24px
+        top: -20px
         border-radius: 50%
         background: #141d27
         .logo
@@ -301,10 +283,10 @@ export default {
             background-color: rgb(0, 160, 220)
           .icon-shopping_cart
             position: absolute
-            line-height: 44px
-            font-size: 24px
+            line-height: 88px
+            font-size: 48px
             color: #80858a
-            left: 10px   // 使用计算的方法进行居中
+            left: 20px
             &.shopping-cart-hightline
               color: white
         .stuffs-count
@@ -312,51 +294,51 @@ export default {
           position: absolute
           top: 0px
           right: 0px
-          width: 24px
-          height: 12px
-          font-size: 9px
+          width: 48px
+          height: 24px
+          font-size: 18px
           font-weight: 700
-          border-radius: 6px
+          border-radius: 12px
           color: rgb(255, 255, 255)
-          line-height: 12px
+          line-height: 24px
           background-color: rgb(240, 20, 20)
-          box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.4)
+          box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4)
           text-align: center
       .price
         display: inline-block
         position: absolute
-        padding-right: 12px
+        padding-right: 24px
         border-right: 1px solid rgba(255, 255, 255, 0.1)
-        font-size: 16px
+        font-size: 32px
         color: rgba(255, 255, 255, 0.4)
         font-weight: 700
-        line-weight: 24px
-        margin-top: 12px
-        height: 30px
-        margin-bottom: 12px
-        line-height: 30px
+        line-weight: 48px
+        margin-top: 24px
+        height: 60px
+        margin-bottom: 24px
+        line-height: 60px
         box-sizing: border-box
         &.price-hightline
           color: white
       .description
         display: inline-block
         vertical-align: top
-        margin: 0 50px
-        font-size: 16px
+        margin: 0 100px
+        font-size: 32px
         color: rgba(255, 255, 255, 0.4)
         font-weight: 700
-        line-height: 54px
+        line-height: 108px
     .content-right
       position: absolute
       right: 0px
       bottom: 0px
-      width: 105px
-      height: 54px
-      margin-left: 8px
-      font-size: 12px
+      width: 210px
+      height: 108px
+      margin-left: 16px
+      font-size: 24px
       color: rgba(255, 255, 255, 0.4)
       font-weight: 700
-      line-height: 54px
+      line-height: 108px
       text-align: center
       background-color: #2b333b
       &.content-right-hightline
@@ -366,13 +348,13 @@ export default {
   .ball-container
     .ball
       position: fixed
-      left: 32px
-      bottom: 22px
+      left: 64px
+      bottom: 44px
       z-index: 200px
       transition: all 0.4s cubic-bezier(.25, -0.69, .58, .78)
       .inner
-        width: 16px
-        height: 16px
+        width: 32px
+        height: 32px
         border-radius: 50%
         background: rgb(0, 160, 220)
         transition: all 0.4s linear
@@ -391,49 +373,49 @@ export default {
       transform translate3d(0, 0, 0)
     }
     .shopcart-header
-      height: 40px
-      line-height: 40px
-      padding: 0px 18px
+      height: 80px
+      line-height: 80px
+      padding: 0px 36px
       background: #f3f5f7
       border-bottom: 1px solid rgba(7, 17, 27, 0.1)
       .cart-header
         float: left
-        font-size: 14px
+        font-size: 28px
         color: rgb(7, 17, 27)
       .clear
         float: right
-        font-size: 12px
+        font-size: 24px
         color: rgb(0, 160, 220)
         cursor: pointer
     .shopcart-content
-      padding: 0 18px
-      max-height: 217px
+      padding: 0 36px
+      max-height: 434px
       background-color: #ffffff
       overflow: auto
       .shopcart-list
         position: relative
-        padding: 12px 0
+        padding: 24px 0
         box-sizing: border-box
         border-1px(rgba(7, 17, 27, 0.1))
         .name
           display: inline-block
-          fonts-size: 14px
+          fonts-size: 28px
           color: rgb(7, 17, 27)
-          line-height: 24px
+          line-height: 48px
         .price
           display: inline-block
           position: absolute
-          bottom: 12px
-          right: 90px
-          font-size: 14px
+          bottom: 24px
+          right: 180px
+          font-size: 28px
           color: rgb(240, 20, 20)
-          line-height: 24px
+          line-height: 48px
           font-weight: 700
         .cartcontrol-wrapper
           display: inline-block
           position: absolute
-          width: 72px
-          height: 24px
+          width: 144px
+          height: 48px
           right: 0px
-          bottom: 12px
+          bottom: 24px
 </style>

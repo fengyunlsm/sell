@@ -78,19 +78,19 @@ export default {
     cursor: pointer
     display: inline-block
     position: absolute
-    right: 66px
+    right: 132px
     &.fade-enter-active, &.fade-leave-active {
       transition: all 0.4s linear
     }
     &.fade-enter, &.fade-leave-to {
       opacity: 0
-      transform: translate3d(24px, 0, 0)
+      transform: translate3d(48px, 0, 0)
     }
     .inner
       display: inline-block
-      font-size: 24px
+      font-size: 48px
       color: rgb(0, 160, 220)
-      line-height: 24px
+      line-height: 48px
       &.inner-enter-active, &.inner-leave-active {
         transition: all 0.4s linear
         transform: rotate(0)
@@ -101,18 +101,18 @@ export default {
       }
   .shop-counts
     position: absolute
-    right: 42px
-    width: 24px
+    right: 84px
+    width: 42px
     text-align: center
     display: inline-block
-    font-size: 10px
+    font-size: 20px
     color: rgb(147, 153, 159)
-    line-height: 24px
+    line-height: 42px
   .increase-control
     cursor: pointer
     position: absolute
-    right: 18px
-    font-size: 24px
+    right: 36px
+    font-size: 48px
     color: rgb(0, 160, 220)
-    line-height: 24px
+    line-height: 48px
 </style>

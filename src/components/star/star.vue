@@ -28,7 +28,6 @@ export default {
           starArray.push('off')
         }
       }
-
       let addHalf = function (integerNumber) {
         for (var i = 0; i < (5 - integerNumber); i++) {
           starArray.push('half')
@@ -39,7 +38,6 @@ export default {
           starArray.push('on')
         }
       }
-      // 先添加全星
       addOn(integerNumber)
       if (decimalNumber === 0) {
         addOff(integerNumber)
@@ -64,66 +62,73 @@ export default {
       display: table
       .star-item
         display: table-cell
-        width: 10px
-        height: 10px
-        margin-right: 3px
-        background-size: 10px 9.5px
+        width: 20px
+        height: 20px
+        margin-right: 6px
+        background-size: 20px 19px
         &.on
           bg-image('star24_on')
-          height: 10px
-          width: 9.5px
+          height: 20px
+          width: 19px
         &.off
           bg-image('star24_off')
-          height: 10px
-          width: 9.5px
+          height: 20px
+          width: 19px
         &.half
           bg-image('star24_half')
-          height: 10px
-          width: 9.5px
+          height: 20px
+          width: 19px
     &.star-36
       display: table
       .star-item
         display: table-cell
-        width: 15px
-        height: 14.5px
+        width: 30px
+        height: 29px
         marign: auto
-        margin-right: 3px
-        background-size: 15px 14.5px
+        margin-right: 6px
+        background-size: 30px 29px
         &:last-child
           margin-right: 0
         &.on
           bg-image('star36_on')
-          height: 15px
-          width: 14.5px
+          height: 30px
+          width: 29px
         &.off
           bg-image('star36_off')
-          height: 15px
-          width: 14.5px
+          height: 30px
+          width: 29px
         &.half
           bg-image('star36_half')
-          height: 15px
-          width: 14.5px
+          height: 30px
+          width: 29px
     &.star-48
       display: table
       margin: 0 auto
       .star-item
         display: table-cell
+<<<<<<< HEAD
         width: 19px
         height: 20px
         margin-right: 3px
         background-size: 20px 19px
+=======
+        width: 38px
+        height: 40px
+        margin-right: 6px
+        background-size: 40px 38px
+>>>>>>> dev
         &:last-child
           margin-right: 0
         &.on
           bg-image('star48_on')
-          height: 20px
-          width: 19px
+          height: 40px
+          width: 38px
         &.off
           bg-image('star48_off')
-          height: 20px
-          width: 19px
+          height: 40px
+          width: 38px
         &.half
           bg-image('star48_half')
-          height: 20px
-          width: 19px
+          height: 40px
+          width: 38px
 </style>

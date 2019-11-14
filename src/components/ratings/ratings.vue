@@ -32,7 +32,7 @@
     </div>
     <split></split>
     <div class="ratingselect-wrapper">
-      <ratingselect @showEval="showEval" ref="ratingselect" @setSelectType="setSelectType" @seDefaultContentType="seDefaultContentType" @setContentType="setContentType" :ratings="ratings" :type-Select="selectType" :contentType="contentType" :tag="tag"></ratingselect>
+      <ratingselect ref="ratingselect" @filterByLabel="filterByLabel" @filterByContent="filterByContent" @setSelectType="setSelectType" @setDefaultContentType="setDefaultContentType" @setContentType="setContentType" :ratings="ratings" :type-Select="selectType" :contentType="contentType" :tag="tag"></ratingselect>
     </div>
     <ul class="comment-wrapper">
       <li class="comment-list" v-for="rating in selectEval" v-bind:key="rating.id">
@@ -91,23 +91,30 @@ export default {
       showFlag: false,
       selectType: POSITIVE,
       contentType: true,
-      tag: ['全部', '满意', '不满'],
-      selectEval: [],
+      tag: ['全部', '满意', '吐槽'],
       ratings: []
     }
   },
   created: function () {
     this.$nextTick(() => {
-      this.selectEval = this.ratings
-      this.showEval(this.selectType, this.contentType)
+      // this.selectEval = this.ratings   // 有必要删除这一行
+      // this.showEval(this.selectType, this.contentType) 有必要删除这一行
     })
     this.$http.get('/api/ratings').then((response) => {
       let resp = response.body
       if (resp.errno === ERR_OK) {
-        this.selectEval = resp.data
         this.ratings = resp.data
       }
     })
+  },
+  computed: {
+
+    selectEval () {
+      // 根据类型 和  切换内容 来显示 所有评论
+      let resultByLabel = this.filterByLabel(this.selectType)
+      let result = this.filterByContent(resultByLabel, this.contentType)
+      return result
+    }
   },
   methods: {
     date (time) {
@@ -120,10 +127,52 @@ export default {
       let s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
       return Y + '-' + M + '-' + D + ' ' + h + ':' + m + ':' + s
     },
+    filterByContent (filterList, contentType) {
+        // 根据是否显示全部内容进行过滤
+      let getNoContentComment = function () {
+        let newList = []
+        for (let i = 0; i < filterList.length; i++) {
+          if (filterList[i].text !== '') {
+            newList.push(filterList[i])
+          }
+        }
+        return newList
+      }
+
+      let noContentComment = getNoContentComment()
+      let hasContentComment = filterList
+      // console.log('contentType:', contentType)
+      // console.log('noContentComment', noContentComment)
+      // console.log('hasContentComment', hasContentComment)
+      if (contentType === true) {
+        return hasContentComment
+      } else {
+        return noContentComment
+      }
+    },
+    filterByLabel (filterType) {
+      // 根据标签来筛选评论
+      if (filterType === 0) {
+        // 全部, 这里显示默认为空
+        return this.ratings
+      } else {
+        let newFilterType = filterType - 1
+        let filterList = []
+        // 推荐 和 吐槽 和
+        for (let i = 0; i < this.ratings.length; i++) {
+          if (this.ratings[i].rateType === newFilterType) {
+            filterList.push(this.ratings[i])
+          }
+        }
+        // 过滤内容为空/全部的评价
+        console.log('filterList:', filterList)
+        return filterList
+      }
+    },
     setSelectType (selectType) {
       this.selectType = selectType
     },
-    seDefaultContentType () {
+    setDefaultContentType () {
       this.contentType = true
     },
     setContentType () {
@@ -132,13 +181,6 @@ export default {
       } else {
         this.contentType = true
       }
-    },
-    showEval (label, contentType) {
-      // 点击三个标签显示所有评价内容
-      // 点击下面的勾选按钮，能筛选其中的内容
-      // 什么鬼，调用了三次这个地方那个
-      let resultByLabel = this.$refs.ratingselect.filterByLabel(label)
-      this.selectEval = this.$refs.ratingselect.filterByContent(resultByLabel, contentType)
     }
   },
   components: {
@@ -152,93 +194,93 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
 .evaluate
   .evaluate-wrapper
-    margin: 18px 24px 18px  0px
+    margin: 36px 48px 36px  0px
     position: relative
     .comprehensive-wrapper
       display: inline-block
-      margin-bottom: 12px
-      width: 137.5px
+      margin-bottom: 24px
+      width: 275px
       .score
         text-align:center
-        font-size: 24px
+        font-size: 48px
         color: rgb(255, 153, 0)
-        line-height: 28px
-        margin-bottom: 6px
+        line-height: 56px
+        margin-bottom: 12px
       .text
         text-align:center
-        margin: 6px 0px 8px 0px
-        font-size: 12px
+        margin: 12px 0px 16px 0px
+        font-size: 24px
         color: rgb(7, 17, 27)
-        line-height: 12px
+        line-height: 24px
       .precentage
         text-align:center
-        font-size: 10px
+        font-size: 20px
         color: rgb(147, 153, 159)
-        line-height: 10px
+        line-height: 20px
     .service-wrapper
       display: inline-block
       position: absolute
       right: 0px
-      padding-left: 24px
-      width: 189px
-      padding: 0px 24px
+      padding-left: 48px
+      width: 378px
+      padding: 0px 48px
       border-left: 1px solid rgba(7,17,27,0.1)
       .serviceScore
-        margin-bottom: 8px
+        margin-bottom: 16px
         .text
           display: inline-block
-          font-size: 12px
+          font-size: 24px
           color: rgb(7, 17, 27)
-          line-height: 18px
-          padding-right: 12px
+          line-height: 36px
+          padding-right: 24px
         .star-wrapper
           display: inline-block
-          padding-right: 12px
+          padding-right: 24px
           vertical-align: middle
         .score
           display: inline-block
-          font-size: 12px
+          font-size: 24px
           color: rgb(255, 153, 0)
-          line-height: 18px
+          line-height: 36px
       .foodScore
-        margin: 8px 0px
+        margin: 16px 0px
         .text
           display: inline-block
-          font-size: 12px
+          font-size: 24px
           color: rgb(7, 17, 27)
-          line-height: 18px
-          padding-right: 12px
+          line-height: 36px
+          padding-right: 24px
         .star-wrapper
           display: inline-block
-          padding-right: 12px
+          padding-right: 24px
           vertical-align: middle
         .score
           display: inline-block
-          font-size: 12px
+          font-size: 24px
           color: rgb(255, 153, 0)
-          line-height: 18px
+          line-height: 36px
       .deliveryTime
-        margin-top: 8px
+        margin-top: 16px
         .text
           display: inline-block
-          font-size: 12px
+          font-size: 24px
           color: rgb(7, 17, 27)
-          line-height: 18px
-          padding-right: 12px
+          line-height: 36px
+          padding-right: 24px
         .time
           display: inline-block
-          font-size: 12px
+          font-size: 24px
           color: rgb(147, 153, 159)
-          line-height: 18px
+          line-height: 36px
   .ratingselect-wrapper
     position: relative
-    padding: 18px 18px
+    padding: 36px 36px
     border-bottom: 1px solid rgba(7, 17, 27, 0.1)
   .comment-wrapper
-    margin: 18px 18px
+    margin: 36px 36px
     .comment-list
       position: relative
-      padding: 18px 18px
+      padding: 36px 36px
       border-bottom: 1px solid rgba(7,17,27,0.1)
       .comment-header
         font-size: 0px
@@ -246,74 +288,74 @@ export default {
           display: inline-block
           .img
             display: inline-block
-            width: 28px
-            height: 28px
+            width: 56px
+            height: 56px
             border-radius: 50%
-            margin-right: 12px
+            margin-right: 24px
         .header-right
           display: inline-block
-          marign-left: 12px
-          margin-bottom: 6px
+          marign-left: 24px
+          margin-bottom: 12px
           .header-right-one
             display: inline-block
             .username
               display: inline-block
-              font-size: 10px
+              font-size: 20px
               color: rgb(7, 17, 27)
-              line-height: 12px
+              line-height: 24px
             .time
               display: inline-block
               position: absolute
-              right: 18px
-              font-size: 10px
+              right: 36px
+              font-size: 20px
               font-weight: 200
               color: rgb(147, 153, 159)
-              line-height: 12px
+              line-height: 24px
           .header-right-two
-            margin-top: 4px
+            margin-top: 8px
             .star-wrapper
               display: inline-block
-              margin-right: 6px
+              margin-right: 12px
             .delivery-time
               display: inline-block
-              font-size: 10px
+              font-size: 20px
               font-weight: 200
               color: rgb(147, 153, 159)
-              line-height: 12px
+              line-height: 24px
       .comment-content
         position: relative
-        left: 40px
-        marign-top: 6px
-        margin-bottom: 8px
-        font-size: 12px
+        left: 80px
+        marign-top: 12px
+        margin-bottom: 16px
+        font-size: 24px
         color: rgb(7, 17, 27)
-        line-height: 18px
+        line-height: 36px
       .comment-footer
         position: relative
-        left: 40px
-        margin-top: 8px
+        left: 80px
+        margin-top: 16px
         .icon
           display: inline-block
           &.icon-thumb_up
-            margin-right: 8px
-            font-size: 12px
+            margin-right: 16px
+            font-size: 24px
             color: rgb(0, 160, 220)
-            line-height: 16px
+            line-height: 32px
           &.icon-thumb_down
-            font-size: 12px
+            font-size: 24px
             color: rgb(183, 187, 191)
-            line-height: 16px
+            line-height: 31px
         .recommend-list
           display: inline-block
           .each-recommend
             display: inline-block
-            margin-right: 8px
-            font-size: 9px
+            margin-right: 16px
+            font-size: 18px
             color: rgb(147, 153, 159)
-            line-height: 32px
+            line-height: 64px
             .recommend
-              border: 2px solid rgba(7, 17, 27, 0.1)
-              border-radius: 2px
+              border: 4px solid rgba(7, 17, 27, 0.1)
+              border-radius: 4px
               background-color: rgb(255, 255, 255)
 
 </style>
