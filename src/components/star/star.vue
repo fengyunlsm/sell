@@ -106,17 +106,10 @@ export default {
       margin: 0 auto
       .star-item
         display: table-cell
-<<<<<<< HEAD
-        width: 19px
-        height: 20px
-        margin-right: 3px
-        background-size: 20px 19px
-=======
         width: 38px
         height: 40px
         margin-right: 6px
         background-size: 40px 38px
->>>>>>> dev
         &:last-child
           margin-right: 0
         &.on
