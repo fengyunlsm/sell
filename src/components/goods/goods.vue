@@ -257,7 +257,7 @@ export default {
         font-weight: 700
   .shoplist-wrapper
     position: relative
-    width: 100%
+    width: 80%
     .shop
       .title
         height: 52px
