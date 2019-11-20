@@ -12,13 +12,12 @@
           <router-link to="/comments">商家</router-link>
       </div>
     </div>
-      <keep-alive>
+      <keep-alive >
         <router-view :seller="seller" v-if="$route.meta.keepAlive"></router-view>
       </keep-alive>
-      <router-view :seller="seller" v-if="!$route.meta.keepAlive"></router-view>
+    <router-view :seller="seller" v-if="!$route.meta.keepAlive"></router-view>
 
     <!-- <router-view ></router-view> -->
-    <!-- <router-view :ratings="ratings"></router-view> -->
   </div>
 </template>
 
