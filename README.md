@@ -5,7 +5,7 @@
 <br>
 
 ### 商品详情页演示<br>
-![image](https://github.com/fengyunlsm/sell/blob/master/resource/image/gif/shoppinglist.gif)<br>
+![image](https://github.com/fengyunlsm/sell/blob/master/resource/gif/shoppinglist.gif)<br>
 该部分主要演示购物车的增删改查，商品详情页的展示，商品列表页的滚动联动，加入购物车时动画的显示
 <br>
 <br>
@@ -20,7 +20,7 @@
 
 
 ### 商家页面演示<br>
-![image](https://github.com/fengyunlsm/sell/blob/master/resource/image/gif/ratings.gif)<br>
+![image](https://github.com/fengyunlsm/sell/blob/master/resource/image/gif/active.gif)<br>
 该部分呢主要展示的是商家页面，商家信息的横向展示
 
 
