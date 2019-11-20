@@ -12,7 +12,7 @@
 <br>
 
 ### 评价页面演示<br>
-![image](https://github.com/fengyunlsm/sell/blob/master/resource/image/gif/ratings.gif)<br>
+![image](https://github.com/fengyunlsm/sell/blob/master/resource/gif/ratings.gif)<br>
 该部分主要展示的是评价页面可以根据是否显示只有内容的评价、根据满意、不满、全部来筛选评论
 <br>
 <br>
@@ -20,9 +20,11 @@
 
 
 ### 商家页面演示<br>
-![image](https://github.com/fengyunlsm/sell/blob/master/resource/image/gif/active.gif)<br>
-该部分呢主要展示的是商家页面，商家信息的横向展示
-
+![image](https://github.com/fengyunlsm/sell/blob/master/resource/gif/active.gif)<br>
+该部分呢主要展示的是商家页面，商家信息的横向展示<br>
+<br>
+<br>
+<br>
 
 ### 运行该项目的命令<br>
 ``` bash
